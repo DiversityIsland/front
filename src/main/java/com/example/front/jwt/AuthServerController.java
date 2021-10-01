@@ -12,6 +12,7 @@ package com.example.front.jwt;
 @RestController
 @RequestMapping("/api")
 public class AuthServerController {
+
     /*
     * используется при авторизации через "Вход"
     * http://localhost/api/authserver?username=ADMIN&password=ADMIN
