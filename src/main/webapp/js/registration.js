@@ -1,7 +1,7 @@
 function saveUser() {
    console.log("saving User")
 
-   const requestForSaveUser = $.ajax('http://localhost:8888/api/save', {
+   const requestForSaveUser = $.ajax('/api/save', {
       method: 'POST',
       contentType: 'application/json',
       data: JSON.stringify({
@@ -26,7 +26,7 @@ function saveUser() {
 
    requestForSaveUser.done(userDto => {
       console.log(userDto)
-      const requestForLogin = $.ajax("http://localhost:8888/login", {
+      const requestForLogin = $.ajax("/login", {
          method: 'POST',
          data: {
             j_username: userDto.username,

@@ -1,5 +1,5 @@
 async function updateUser() {
-    let url = new URL("http://localhost:8888/api/user")
+    let url = new URL("/api/user")
     const response = await fetch(url, {
         method: 'POST',
         headers: {

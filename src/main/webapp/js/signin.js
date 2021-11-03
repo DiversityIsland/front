@@ -1,5 +1,5 @@
 function signin() {
-   const requestForLogin = $.ajax("http://localhost:8888/login", {
+   const requestForLogin = $.ajax("/login", {
       method: 'POST',
       data: {
          j_username: document.getElementById('username_input').value,
