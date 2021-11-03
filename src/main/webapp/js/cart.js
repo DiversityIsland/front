@@ -84,7 +84,7 @@ function insertCartItemRow(cartItem) {
 }
 
 async function deleteCartItem(id) {
-    let url = new URL("http://localhost:8888/api/cart/delete/" + id)
+    let url = new URL("/api/cart/delete/" + id)
 
     const response = await fetch(url, {
         headers: {"Content-Type": "application/json; charset=utf-8"},
@@ -102,7 +102,7 @@ async function updateQuantity(id) {
     let quantHTML = "cartItemQuantity" + id;
     let newQuant = document.getElementById(quantHTML).value;
 
-    const response = await fetch("http://localhost:8888/api/cart/update/" + id, {
+    const response = await fetch("/api/cart/update/" + id, {
         headers: {"Content-Type": "application/json; charset=utf-8"},
         method: 'PATCH',
         body: JSON.stringify({

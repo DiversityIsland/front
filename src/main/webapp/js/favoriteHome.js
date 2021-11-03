@@ -25,7 +25,7 @@ async function favoriteButtonItem(itemId) {
 
 async function addItemToFavorites(itemId) {
 
-    let url = new URL("http://localhost:8888/api/favorites/items/add/"+itemId)
+    let url = new URL("/api/favorites/items/add/"+itemId)
     const response = await fetch(url, {
         headers: { "Content-Type": "application/json; charset=utf-8" },
         method: 'PATCH',
@@ -34,7 +34,7 @@ async function addItemToFavorites(itemId) {
 }
 
 async function deleteFavoriteItem(id){
-    let url = new URL("http://localhost:8888/api/favorites/items/delete/"+id);
+    let url = new URL("/api/favorites/items/delete/"+id);
 
     const response = await fetch(url, {
         headers: { "Content-Type": "application/json; charset=utf-8" },

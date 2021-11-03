@@ -44,12 +44,12 @@ async function insertDiscountCard(discount) {
 }
 
 async function getShop(id) {
-    const response = await fetch("http://localhost:8888/api/shop/"+id)
+    const response = await fetch("/api/shop/"+id)
     const data = await response.json();
     return data;
 }
 async function getShopNames() {
-    const response = await fetch("http://localhost:8888/api/discounts/get_owned_shops");
+    const response = await fetch("/api/discounts/get_owned_shops");
     const data = await response.json();
     console.log(data)
     return data;
@@ -58,7 +58,7 @@ async function getShopNames() {
 async function createDiscount() {
     let selectedShop = document.getElementById('shopsModal').value
     let username = document.getElementById('usernameModal').value
-    let url = new URL("http://localhost:8888/api/discounts/add")
+    let url = new URL("/api/discounts/add")
     url.searchParams.append('shopname', selectedShop);
     url.searchParams.append('username', username);
 

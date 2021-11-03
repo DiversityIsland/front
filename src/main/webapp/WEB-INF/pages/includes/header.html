@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+   <meta charset="UTF-8">
+   <title>Title</title>
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+   <div th:fragment="header">
+      <!--HEADER-->
+      <header class="bg-dark text-white" style="height: 44px;">
+         <div class="container" style="height: 44px;">
+            <div class="d-flex align-items-center justify-content-center justify-content-lg-start"
+                 style="height: 44px;">
+               <a href="/" class="d-flex align-items-center mb-lg-0 text-white text-decoration-none">
+                  <h5 style="margin: 0;">LOGO</h5>
+               </a>
+               <!--NavBar(HEADER)-->
+               <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0 ms-5">
+                  <li><a href="/shops" class="nav-link px-2 text-white"><font style="vertical-align: inherit;"><font
+                        style="vertical-align: inherit;">Магазины</font></font></a></li>
+                  <li><a href="#" class="nav-link px-2 text-white"><font style="vertical-align: inherit;"><font
+                        style="vertical-align: inherit;">Товары</font></font></a></li>
+                  <li><a href="/favorites" sec:authorize="isAuthenticated()" class="nav-link px-2 text-white" id="linkFavorites" ><font style="vertical-align: inherit;"><font
+                        style="vertical-align: inherit;">Избранное</font></font></a></li>
+                  <li><a href="#" class="nav-link px-2 text-white"><font style="vertical-align: inherit;"><font
+                        style="vertical-align: inherit;">Ещё...</font></font></a></li>
+                  <li><a  href="/moderator" sec:authorize="hasAnyAuthority('MODERATOR')" class="nav-link px-2 text-white">
+                     <font style="vertical-align: inherit;">Панель модератора</font></a></li>
+                  <li><a  href="/admin" sec:authorize="hasAnyAuthority('ADMIN')" class="nav-link px-2 text-white">
+                     <font style="vertical-align: inherit;">Панель администратора</font></a></li>
+               </ul>
+
+
+
+
+               <div class="text-end">
+
+
+                  <button sec:authorize="isAnonymous()" type="button" id="user_open_modal_btn"
+                          class="btn btn-outline-light me-2">Войти
+                  </button>
+                  <button sec:authorize="isAnonymous()" type="button" id="user_open_modal_reg" class="btn btn-warning">
+                     Зарегистрироваться
+                  </button>
+
+                  <!--          непонятно кто и c какой целью написал заккоментированный код ниже         <script>-->
+<!--                  <script>-->
+<!--                     $(document).ready(function () {-->
+<!--                        if (window.location.href !== 'http://localhost:8888/') {-->
+<!--                           $('#user_open_modal_btn').hide();-->
+<!--                        }-->
+<!--                     })-->
+<!--                     $(document).ready(function () {-->
+<!--                        if (window.location.href !== 'http://localhost:8888/') {-->
+<!--                           $('#user_open_modal_reg').hide();-->
+<!--                        }-->
+<!--                     })-->
+<!--                  </script>-->
+
+                  <!--ссылка и информация пользователя при аутентификации-->
+                  <div class="dropdown" sec:authorize="isAuthenticated()" style="position: relative; ">
+                     <a href="#" class="d-flex align-items-center text-decoration-none dropdown-toggle show text-white"
+                        id="dropdownUser_btn">
+<!--                        <img th:src="${user.getImages()?.getPictureForPage()}" alt="" width="32" height="32" class="rounded-circle me-2">-->
+<!--                        <strong th:text="${user.getUsername()}"></strong>-->
+                     </a>
+                     <ul class="dropdown-menu text-small shadow" id="dropdown_user"
+                         style="position: absolute; top:45px; left:0; margin: 0px; ">
+<!--                        <li><a class="dropdown-item" th:href="@{/user/{id}(id=${user.getId()})}">Мой профиль</a></li>-->
+                        <li><a class="dropdown-item" th:href="@{/cart}">Корзина</a></li>
+                        <li><a class="dropdown-item" th:href="@{/favorites}">Избранное</a></li>
+                        <li><a class="dropdown-item" th:href="@{/discounts}">Скидки</a></li>
+                        <li>
+                           <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" th:href="@{/logout}">Sign out</a></li>
+                     </ul>
+                     <script>
+                        /**
+                         * переключение окна dropdown
+                         */
+                        $(document).ready(function () {
+                           $('#dropdownUser_btn').on('click', function (e) {
+                              e.preventDefault();
+                              $('#dropdown_user').toggleClass('show');
+                           })
+                        })
+
+                     </script>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <nav class="navbar fixed-bottom navbar-light bg-light">
+            <a class="navbar-brand" href="/feedback">Обратная связь</a>
+         </nav>
+      </header>
+   </div>
+
+   <script src="https://code.jquery.com/jquery-3.6.0.js"
+           integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+</body>
+</html>

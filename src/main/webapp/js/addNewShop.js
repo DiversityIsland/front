@@ -1,7 +1,7 @@
 function saveShop() {
     console.log("adding shop")
 
-    $.ajax('http://localhost:8888/api/shop/add', {
+    $.ajax('/api/shop/add', {
         method: 'POST',
         contentType: 'application/json',
         data: JSON.stringify({
