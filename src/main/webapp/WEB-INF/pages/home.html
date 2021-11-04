@@ -278,7 +278,6 @@
             </div>
             <!--сюда генерируются товары-->
             <div class="col-12 d-flex flex-wrap mt-3" id="dinamic_content_inner">
-
                </div>
             </div>
 
@@ -290,7 +289,7 @@
                   </h4>
                </div>
                <!--Блок популярные товары-->
-               <div class="col-12 d-flex flex-wrap mt-3">
+               <div id="items" class="col-12 d-flex flex-wrap mt-3">
 <!--                  <th:block th:each="item : ${items}">-->
 <!--                     <div class="card" style="width: 18rem; margin-right: 15px; margin-top: 20px;">-->
 <!--                        <img th:src="${item.getImages()[0]}" class="card-img-top" alt="popular_item"-->
@@ -351,6 +350,7 @@
        * динамический контент
        */
       const dinamic_show_content = $('#dinamic_content');
+      const dinamic_head = $('#dinamic_head');
       const dinamic_inner_content = $('#dinamic_content_inner');
       /**
        * поиск
@@ -426,41 +426,6 @@
                dinamic_head.html('Результат запроса "' + valueSearch + '"');
             }
          })
-
-         /**
-          * обработчик
-          * обработчик на кнопке "популярное" в навбар
-          */
-         $(popular_show_btn).on('click', function (e) {
-            e.preventDefault();
-            toggleClassesContent($(this));
-            toggleClassesNavBar($(this));
-         })
-
-         /**
-          * обработчик
-          * обработчик на все кнопки в навбар кроме "популярное"
-          */
-         // $('.link-dark').on('click', function (e) {
-         //    e.preventDefault();
-         //    /**
-         //     * переключение стилей кнопок навбара и контейнера с контентом
-         //     */
-         //    toggleClassesContent($(this));
-         //    toggleClassesNavBar($(this));
-         //
-         //    /**
-         //     * перезапись категории в заголовок
-         //     */
-         //    let category = $(this).html();
-         //    dinamic_head.html("");
-         //    dinamic_head.html(category);
-         //    /** перезапись динамического контента
-         //     *  товары по категории
-         //     */
-         //    searchByCategory($(this));
-         // })
-
 
       })
 
