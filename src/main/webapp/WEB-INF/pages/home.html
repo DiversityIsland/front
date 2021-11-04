@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
    <meta charset="UTF-8">
    <title>Главная</title>
@@ -10,8 +10,14 @@
         в начало этой странице -->
    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+   <!-- JavaScript Bundle with Popper -->
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+           integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+           crossorigin="anonymous"></script>
+   <script src="/js/home.js"></script>
 </head>
 <body>
+
 <!--   <div th:if="${param.error}">-->
 <!--      Invalid username and password.-->
 <!--   </div>-->
@@ -233,21 +239,11 @@
                </div>
                <!--Категории-->
                <div class="col-12 mt-4">
-                  <ul class="nav nav-pills flex-column mb-auto">
+                  <ul id="categories" class="nav nav-pills flex-column mb-auto">
                      <li class="nav-item">
-                        <a id="popular_show_btn" href="#" class="nav-link active" aria-current="page">
-                           Популярное
-                           </font></font></a>
+                        <a id="popular_show_btn" href="#" class="nav-link active" aria-current="page">Популярное</a>
                      </li>
-
-                     <th:block th:each="category : ${categories}">
-                        <li class="nav-item">
-                           <a th:text="${category.getName()}" th:id="${category.getId()}" href="#"
-                              class="nav-link link-dark" aria-current="page">
-                              Одежда
-                              </font></font></a>
-                        </li>
-                     </th:block>
+                     <!--Тут home.js генерит кнопки категорий-->
                   </ul>
                </div>
             </div>
@@ -266,14 +262,14 @@
             </div>
 
             <!-- QR and enable 2FA -->
-            <div class="mt-3" sec:authorize="isAuthenticated()">
-               <th:block th:if="${qr}">
-                  <img th:src="${qr}" alt="qr">
-                  <div class="mt-2">
-                     <button class="btn btn-primary" type="button" onclick="updateTwoFactorAuth(true)">Включить 2FA</button>
-                  </div>
-               </th:block>
-            </div>
+<!--            <div class="mt-3" sec:authorize="isAuthenticated()">-->
+<!--               <th:block th:if="${qr}">-->
+<!--                  <img th:src="${qr}" alt="qr">-->
+<!--                  <div class="mt-2">-->
+<!--                     <button class="btn btn-primary" type="button" onclick="updateTwoFactorAuth(true)">Включить 2FA</button>-->
+<!--                  </div>-->
+<!--               </th:block>-->
+<!--            </div>-->
 
          <!--Контейнер для динамического контента (js)-->
          <div class="collapse" id="dinamic_content">
@@ -295,27 +291,27 @@
                </div>
                <!--Блок популярные товары-->
                <div class="col-12 d-flex flex-wrap mt-3">
-                  <th:block th:each="item : ${items}">
-                     <div class="card" style="width: 18rem; margin-right: 15px; margin-top: 20px;">
-                        <img th:src="${item.getImages()[0]}" class="card-img-top" alt="popular_item"
-                             style="height: 180px;">
-                        <div class="card-body">
-                           <h5 th:text="${item.getName()}" class="card-title">Заголовок товара</h5>
-                           <p th:text="${item.getDescription()}" class="card-text">Описание товара:</p>
-                           <div class="d-flex">
-                              <a href="#" class="btn btn-danger"
-                                 th:attr="onclick=|addCartItem('${item.id}','${item.shopId}')|"
-                                 style="width: 150px;">В корзину</a>
-                              <a th:href="@{/product/{id}(id = ${item.getId()})}" class="btn btn-primary"
-                                 style="margin-left: 10px;">Смотреть</a>
-                           </div>
-                           <div class="mt-2 d-flex" th:id="'favoriteButton'+${item.id}">
-                              <!--                                    <button class="btn btn-info btn-block" th:attr="onclick=|addItemToFavorites('${item.id}')|">Добавить в избранное</button>-->
-                           </div>
-                           <div th:name="favItems" th:id="'favItem'+${item.id}"></div>
-                        </div>
-                     </div>
-                  </th:block>
+<!--                  <th:block th:each="item : ${items}">-->
+<!--                     <div class="card" style="width: 18rem; margin-right: 15px; margin-top: 20px;">-->
+<!--                        <img th:src="${item.getImages()[0]}" class="card-img-top" alt="popular_item"-->
+<!--                             style="height: 180px;">-->
+<!--                        <div class="card-body">-->
+<!--                           <h5 th:text="${item.getName()}" class="card-title">Заголовок товара</h5>-->
+<!--                           <p th:text="${item.getDescription()}" class="card-text">Описание товара:</p>-->
+<!--                           <div class="d-flex">-->
+<!--                              <a href="#" class="btn btn-danger"-->
+<!--                                 th:attr="onclick=|addCartItem('${item.id}','${item.shopId}')|"-->
+<!--                                 style="width: 150px;">В корзину</a>-->
+<!--                              <a th:href="@{/product/{id}(id = ${item.getId()})}" class="btn btn-primary"-->
+<!--                                 style="margin-left: 10px;">Смотреть</a>-->
+<!--                           </div>-->
+<!--                           <div class="mt-2 d-flex" th:id="'favoriteButton'+${item.id}">-->
+<!--                              &lt;!&ndash;                                    <button class="btn btn-info btn-block" th:attr="onclick=|addItemToFavorites('${item.id}')|">Добавить в избранное</button>&ndash;&gt;-->
+<!--                           </div>-->
+<!--                           <div th:name="favItems" th:id="'favItem'+${item.id}"></div>-->
+<!--                        </div>-->
+<!--                     </div>-->
+<!--                  </th:block>-->
 
                </div>
                <!--Блок популярные магазины-->
@@ -326,18 +322,18 @@
                </div>
 
                <div class="col-12 d-flex flex-wrap mt-3">
-                  <th:block th:each="shop : ${shops}">
-                     <div class="card" style="width: 18rem; margin-right: 15px; margin-top: 20px; overflow: hidden;">
-                        <img th:src="${shop.getLogo()}" class="card-img-top" alt="popular_shop"
-                             style="height: 180px;">
-                        <div class="card-body">
-                           <h5 th:text="${shop.getName()}" class="card-title">Заголовок магазины</h5>
-                           <p th:text="${shop.getDescription()}" class="card-text">Описание магазина:</p>
-                           <a th:href="@{/showcase/{id}(id = ${shop.getId})}" class="btn btn-danger">Перейти в
-                              магазин</a>
-                        </div>
-                     </div>
-                  </th:block>
+<!--                  <th:block th:each="shop : ${shops}">-->
+<!--                     <div class="card" style="width: 18rem; margin-right: 15px; margin-top: 20px; overflow: hidden;">-->
+<!--                        <img th:src="${shop.getLogo()}" class="card-img-top" alt="popular_shop"-->
+<!--                             style="height: 180px;">-->
+<!--                        <div class="card-body">-->
+<!--                           <h5 th:text="${shop.getName()}" class="card-title">Заголовок магазины</h5>-->
+<!--                           <p th:text="${shop.getDescription()}" class="card-text">Описание магазина:</p>-->
+<!--                           <a th:href="@{/showcase/{id}(id = ${shop.getId})}" class="btn btn-danger">Перейти в-->
+<!--                              магазин</a>-->
+<!--                        </div>-->
+<!--                     </div>-->
+<!--                  </th:block>-->
                </div>
             </div>
 
@@ -345,13 +341,6 @@
       </div>
    </section>
 
-   <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-           integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-
-   <!-- JavaScript Bundle with Popper -->
-   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-           integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-           crossorigin="anonymous"></script>
    <script>
       /**
        * связано с статическим контентом
@@ -362,7 +351,6 @@
        * динамический контент
        */
       const dinamic_show_content = $('#dinamic_content');
-      const dinamic_head = $('#dinamic_head');
       const dinamic_inner_content = $('#dinamic_content_inner');
       /**
        * поиск
@@ -453,25 +441,25 @@
           * обработчик
           * обработчик на все кнопки в навбар кроме "популярное"
           */
-         $('.link-dark').on('click', function (e) {
-            e.preventDefault();
-            /**
-             * переключение стилей кнопок навбара и контейнера с контентом
-             */
-            toggleClassesContent($(this));
-            toggleClassesNavBar($(this));
-
-            /**
-             * перезапись категории в заголовок
-             */
-            let category = $(this).html();
-            dinamic_head.html("");
-            dinamic_head.html(category);
-            /** перезапись динамического контента
-             *  товары по категории
-             */
-            searchByCategory($(this));
-         })
+         // $('.link-dark').on('click', function (e) {
+         //    e.preventDefault();
+         //    /**
+         //     * переключение стилей кнопок навбара и контейнера с контентом
+         //     */
+         //    toggleClassesContent($(this));
+         //    toggleClassesNavBar($(this));
+         //
+         //    /**
+         //     * перезапись категории в заголовок
+         //     */
+         //    let category = $(this).html();
+         //    dinamic_head.html("");
+         //    dinamic_head.html(category);
+         //    /** перезапись динамического контента
+         //     *  товары по категории
+         //     */
+         //    searchByCategory($(this));
+         // })
 
 
       })
@@ -532,7 +520,7 @@
 
       async function addCartItem(itemId, shopId) {
          // let quant = document.getElementById("itemQuant").value;
-         let url = new URL("http://localhost:8888/api/cart/add")
+         let url = new URL("/api/cart/add")
          const response = await fetch(url, {
             method: 'POST',
             headers: {
@@ -565,9 +553,9 @@
       }
 
    </script>
-   <script type="text/javascript" th:src="@{/js/favoriteHome.js}" src="../static/js/favoriteHome.js"></script>
-   <script type="text/javascript" th:src="@{js/registration.js}" src="../static/js/registration.js"></script>
-   <script type="text/javascript" th:src="@{js/signin.js}" src="../static/js/signin.js"></script>
-   <script type="text/javascript" th:src="@{js/twoFactorAuth.js}" src="../static/js/twoFactorAuth.js"></script>
+<!--   <script type="text/javascript" th:src="@{/js/favoriteHome.js}" src="../static/js/favoriteHome.js"></script>-->
+<!--   <script type="text/javascript" th:src="@{js/registration.js}" src="../static/js/registration.js"></script>-->
+<!--   <script type="text/javascript" th:src="@{js/signin.js}" src="../static/js/signin.js"></script>-->
+<!--   <script type="text/javascript" th:src="@{js/twoFactorAuth.js}" src="../static/js/twoFactorAuth.js"></script>-->
 </body>
 </html>

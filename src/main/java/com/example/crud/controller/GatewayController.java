@@ -1,6 +1,7 @@
 package com.example.crud.controller;
 
 
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,6 +26,12 @@ public class GatewayController {
 //        return respEntity.getBody();
 //        //return "home";
 //    }
+
+    @Secured({"ROLE_ADMIN","ROLE_USER"})
+    @GetMapping("/user")
+    public String userPage()  {
+        return "home";
+    }
 
 }
 
