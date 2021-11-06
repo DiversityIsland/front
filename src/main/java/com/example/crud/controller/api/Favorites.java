@@ -1,31 +1,40 @@
 package com.example.crud.controller.api;
 
+import com.example.crud.model.UserDTO;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 import static com.example.crud.controller.RestService.*;
 
 
 @RestController
-@RequestMapping("/api/favorites")
+@RequestMapping("/")
 public class Favorites {
 
-    @GetMapping()
+    @GetMapping("/api/favorites")
     public ResponseEntity<String> favoritesPopular() {
         return getJSON(backServerAddress+"/api/item/popular/");
     }
 
-    @GetMapping("/existsItem/{id}")
+    @GetMapping("/favorites")
+    public ResponseEntity<String> favoritesPopularPost() {
+        String username = "user1";
+        return postJSON(backServerAddress+"/favorites/", username);
+    }
+
+    @GetMapping("/api/favorites/existsItem/{id}")
     public ResponseEntity<String> favoritesExists(@PathVariable long id) {
         return getJSON(backServerAddress+"/api/favorites/existsItem/"+id);
     }
 
-    @GetMapping("/items")
+    @GetMapping("/api/favorites/items")
     public ResponseEntity<String> favoritesItems() {
         return getJSON(backServerAddress+"/api/favorites/items/");
     }
 
-    @GetMapping("/shops")
+    @GetMapping("/api/favorites/shops")
     public ResponseEntity<String> favoritesShops() {
         return getJSON(backServerAddress+"/api/favorites/shops/");
     }

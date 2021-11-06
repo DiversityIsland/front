@@ -18,13 +18,22 @@ public class RestService {
     }
 
     public static ResponseEntity<String> getJSON(String url) {
-
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
         HttpEntity<String> entity = new HttpEntity<>(headers);
         ResponseEntity<String> respEntity = new RestTemplate().exchange(url, HttpMethod.GET, entity, String.class);
         System.out.println("[RestService] getJSON: "+url+" [HTTP "+respEntity.getStatusCodeValue()+"]");
+        return respEntity;
+    }
+
+    public static ResponseEntity<String> postJSON(String url, String postData) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        HttpEntity<String> entity = new HttpEntity<>(postData, headers);
+        ResponseEntity<String> respEntity = new RestTemplate().exchange(url, HttpMethod.POST, entity, String.class);
+        System.out.println("[RestService] postJSON: "+url+" [HTTP "+respEntity.getStatusCodeValue()+"]");
         return respEntity;
     }
 }
