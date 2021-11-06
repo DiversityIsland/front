@@ -20,6 +20,7 @@ public class Favorites {
 
     @GetMapping("/favorites")
     public ResponseEntity<String> favoritesPopularPost() {
+        //todo тут user1 это заглушка
         String username = "user1";
         return postJSON(backServerAddress+"/favorites/", username);
     }
