@@ -33,6 +33,18 @@ public class GatewayController {
         return "home";
     }
 
+    @Secured({"ROLE_ADMIN","ROLE_USER"})
+    @GetMapping("/shops")
+    public String shopsPage()  {
+        return "shops";
+    }
+
+    @Secured({"ROLE_ADMIN","ROLE_USER"})
+    @GetMapping("/feedback")
+    public String feedbackPage()  {
+        return "feedback";
+    }
+
 }
 
 
