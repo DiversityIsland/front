@@ -290,27 +290,27 @@
                </div>
                <!--Блок популярные товары-->
                <div id="items" class="col-12 d-flex flex-wrap mt-3">
-<!--                  <th:block th:each="item : ${items}">-->
-<!--                     <div class="card" style="width: 18rem; margin-right: 15px; margin-top: 20px;">-->
-<!--                        <img th:src="${item.getImages()[0]}" class="card-img-top" alt="popular_item"-->
-<!--                             style="height: 180px;">-->
-<!--                        <div class="card-body">-->
-<!--                           <h5 th:text="${item.getName()}" class="card-title">Заголовок товара</h5>-->
-<!--                           <p th:text="${item.getDescription()}" class="card-text">Описание товара:</p>-->
-<!--                           <div class="d-flex">-->
-<!--                              <a href="#" class="btn btn-danger"-->
-<!--                                 th:attr="onclick=|addCartItem('${item.id}','${item.shopId}')|"-->
-<!--                                 style="width: 150px;">В корзину</a>-->
-<!--                              <a th:href="@{/product/{id}(id = ${item.getId()})}" class="btn btn-primary"-->
-<!--                                 style="margin-left: 10px;">Смотреть</a>-->
-<!--                           </div>-->
-<!--                           <div class="mt-2 d-flex" th:id="'favoriteButton'+${item.id}">-->
-<!--                              &lt;!&ndash;                                    <button class="btn btn-info btn-block" th:attr="onclick=|addItemToFavorites('${item.id}')|">Добавить в избранное</button>&ndash;&gt;-->
-<!--                           </div>-->
-<!--                           <div th:name="favItems" th:id="'favItem'+${item.id}"></div>-->
-<!--                        </div>-->
-<!--                     </div>-->
-<!--                  </th:block>-->
+                  <th:block th:each="item : ${items}">
+                     <div class="card" style="width: 18rem; margin-right: 15px; margin-top: 20px;">
+                        <img th:src="${item.getImages()[0]}" class="card-img-top" alt="popular_item"
+                             style="height: 180px;">
+                        <div class="card-body">
+                           <h5 th:text="${item.getName()}" class="card-title">Заголовок товара</h5>
+                           <p th:text="${item.getDescription()}" class="card-text">Описание товара:</p>
+                           <div class="d-flex">
+                              <a href="#" class="btn btn-danger"
+                                 th:attr="onclick=|addCartItem('${item.id}','${item.shopId}')|"
+                                 style="width: 150px;">В корзину</a>
+                              <a th:href="@{/product/{id}(id = ${item.getId()})}" class="btn btn-primary"
+                                 style="margin-left: 10px;">Смотреть</a>
+                           </div>
+                           <div class="mt-2 d-flex" th:id="'favoriteButton'+${item.id}">
+                              <!--                                    <button class="btn btn-info btn-block" th:attr="onclick=|addItemToFavorites('${item.id}')|">Добавить в избранное</button>-->
+                           </div>
+                           <div th:name="favItems" th:id="'favItem'+${item.id}"></div>
+                        </div>
+                     </div>
+                  </th:block>
 
                </div>
                <!--Блок популярные магазины-->
