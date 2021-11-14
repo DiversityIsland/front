@@ -67,9 +67,24 @@ public class Startup {
         return ThreadLocalRandom.current().nextInt(18, 65);
     }
 
+    public int[] twoSum(int[] nums, int target) {
+        for (int i=0; i<nums.length-1; i++) {
+            for (int x=i+1; x<nums.length; x++) {
+                if ((i+x)==target) {
+
+                    System.out.println(i+":"+x);
+                    return new int[]{i,x};
+                }
+            }
+        }
+        return null;
+    }
+
     @Bean
     public void init() {
         System.out.println("Startup initializing");
+        int[] arr = new int[]{2,7,11,15};
+        twoSum(arr,9);
 
 
 
