@@ -1,9 +1,13 @@
 package com.example.crud.controller;
 
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import static com.example.crud.controller.RestService.backServerAddress;
+import static com.example.crud.controller.RestService.getJSON;
 
 @Controller
 @RequestMapping("/")
@@ -33,10 +37,17 @@ public class GatewayController {
         return "home";
     }
 
-    @Secured({"ROLE_ADMIN","ROLE_USER"})
-    @GetMapping("/shops")
-    public String shopsPage()  {
-        return "shops";
+
+
+    @RestController
+    @RequestMapping("/")
+    public class Shops {
+
+        @GetMapping("/shops")
+        public ResponseEntity<String> allModeratedShops() {
+            return getJSON(backServerAddress+"/shops/");
+        }
+
     }
 
     @Secured({"ROLE_ADMIN","ROLE_USER"})
