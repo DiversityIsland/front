@@ -6,13 +6,12 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.security.Principal;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
 
@@ -79,7 +78,14 @@ public class JwtController {
         }
     }
 
+    //http://localhost/api/auth?username=ADMIN&password=ADMIN
+    @PostMapping("/auth")
+    public String jwtAuthPost(HttpServletResponse response, HttpServletRequest request, @RequestBody String[] credentials)
+    {
+        System.out.println(Arrays.toString(credentials));
 
+        return "ok";
+    }
 
     //http://localhost/api/logout
     @GetMapping("/logout")

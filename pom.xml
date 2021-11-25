@@ -10,7 +10,7 @@
     </parent>
 
     <groupId>ru.jm</groupId>
-    <artifactId>crud</artifactId>
+    <artifactId>front</artifactId>
     <version>1.0</version>
     <packaging>war</packaging>
     <name>CRUD-MVC-demo</name>
