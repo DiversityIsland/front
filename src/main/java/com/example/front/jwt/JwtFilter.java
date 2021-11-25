@@ -1,21 +1,13 @@
 package com.example.front.jwt;
 
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.web.authentication.WebAuthenticationDetails;
-import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.text.AbstractDocument;
 import java.io.IOException;
 
 import static com.example.front.jwt.CookieUtils.*;
@@ -24,29 +16,31 @@ import static com.example.front.jwt.JwtUtils.JwtTokenStatus.*;
 
 @Configuration
 public class JwtFilter extends OncePerRequestFilter {
-    RefreshTokenRepository refreshTokenRepository;
 
-    @Autowired
-    public JwtFilter(RefreshTokenRepository refreshTokenRepository) {
-        this.refreshTokenRepository = refreshTokenRepository;
+    private String updateJwtToken(String jwr) {
+        JwtTokenStatus tokenRefreshStatus = checkToken(jwr);
+        System.out.printf("Token status: %s\n", tokenRefreshStatus);
+
+        if (tokenRefreshStatus == TOKEN_VALID) {
+            Long uid = getUserIdFromJwt(jwr);
+            String username = getFieldFromJwt(jwr, "username");
+            return generateAccessToken(uid, username, 86400);
+        } else {
+            System.out.printf("Update JWT failed: JWR is %s\n", tokenRefreshStatus);
+        }
+        return "";
     }
-
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
 
-        //skip auth filter if user is authorized
-        if ((SecurityContextHolder.getContext().getAuthentication() != null) && (SecurityContextHolder.getContext().getAuthentication().isAuthenticated())) {
-            filterChain.doFilter(request, response);
-            return;
-        }
-
         int remotePort = request.getRemotePort();
         //skip auth if user has no JWT token
         String jwt = getCookieFromRequest(request, "JWT");
-        if (jwt == null) {
-            System.out.printf("[%s] Token status: none\n", remotePort);
+        String jwr = getCookieFromRequest(request, "JWR");
+        if ((jwt == null) && (jwr == null)) {
+            System.out.printf("[%s] No JWT token\n", remotePort);
             filterChain.doFilter(request, response);
             return;
         }
@@ -54,62 +48,23 @@ public class JwtFilter extends OncePerRequestFilter {
         System.out.printf("[Filter] %s %s [%s<-%s:%s] User %s, session: %s\n",
                 request.getMethod(), request.getRequestURL(), request.getLocalPort(), request.getRemoteHost(), request.getRemotePort(), request.getRemoteUser(), request.getRequestedSessionId());
 
+        if (jwt == null) {
+            jwt = updateJwtToken(jwr);
+        }
 
         JwtTokenStatus tokenStatus = checkToken(jwt);
         System.out.printf("[%s] Token status: %s\n", remotePort, tokenStatus);
 
         if (tokenStatus == TOKEN_EXPIRED) {
-            String jwr = getCookieFromRequest(request, "JWR");
-            JwtTokenStatus tokenRefreshStatus = checkToken(jwr);
-            if (tokenRefreshStatus == TOKEN_VALID) {
-                System.out.printf("[%s] JWT refresh token is valid\n", remotePort);
-                Long uid = getUserIdFromJwt(jwr);
-
-                if (refreshTokenRepository.findByToken(jwr).isPresent()) {
-                    String username = getFieldFromJwt(jwr, "username");
-                    User user = AuthServerController.getById(uid);
-                    if (user.getUsername().equals(username)) {
-                        String newJwt = generateAccessToken(uid, username, 86400);
-                        JwtTokenStatus newTokenStatus = checkToken(newJwt);
-                        jwt = newJwt;
-                        tokenStatus = newTokenStatus;
-
-                        response.addCookie(setCookie("JWT", newJwt, 86400));
-                        System.out.printf("[%s] JWT token refreshed via JWT Refresh token\n", remotePort);
-                    }
-
-                }
-            } else {
-                System.out.printf("[%s] JWT expired, JWR is invalid\n", remotePort);
-            }
-            //todo refresh token needs refresh?
+            jwt = updateJwtToken(jwr);
+            tokenStatus = checkToken(jwt);
         }
-
 
         if (tokenStatus == TOKEN_VALID) {
             Long uid = getUserIdFromJwt(jwt);
-            String username = getFieldFromJwt(jwt, "username");
-
-            //jwt -> id -> find user in DB. users username from DB == "username" from jwt token?
             User user = AuthServerController.getById(uid);
-            System.out.println("authing user:"+user);
-            if (user.getUsername().equals(username)) {
-                System.out.println("Proceeding auth");
-                UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
-                System.out.println("Proceeding auth: " + auth);
-                WebAuthenticationDetails webAuthenticationDetails = new WebAuthenticationDetailsSource().buildDetails(request);
-                System.out.println("Proceeding webAuthenticationDetails: " + webAuthenticationDetails);
-                auth.setDetails(webAuthenticationDetails);
-
-                SecurityContext securityContext = SecurityContextHolder.getContext();
-                System.out.println("Proceeding securityContext1: " + securityContext);
-                securityContext.setAuthentication(auth);
-                System.out.println("Proceeding securityContext2: " + securityContext);
-                //If everything goes fine, set authentication to Security context holder
-                //SecurityContextHolder.getContext().setAuthentication(auth);
-            }
+            AuthUser.authUser(request, user.getUsername(), user.getAuthorities());
         }
-
         filterChain.doFilter(request, response);
     }
 
