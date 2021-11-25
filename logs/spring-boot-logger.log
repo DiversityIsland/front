@@ -1598,7 +1598,13 @@ org.thymeleaf.exceptions.TemplateInputException: Error resolving template [<!DOC
 	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.base/java.lang.Thread.run(Thread.java:829)
-2021-11-03 13:41:11,509 ERROR org.thymeleaf.TemplateEngine [http-nio-80-exec-5] [THYMELEAF][http-nio-80-exec-5] Exception processing template "<!DOCTYPE html> <html> <head>   [...]t type="text/javascript" src="js/twoFactorAuth.js"></script> </body> </html> ": Error resolving template [<!DOCTYPE html>
+2021-11-03 13:41:11,509 ERROR org.thymeleaf.TemplateEngine [http-nio-80-exec-5] [THYMELEAF][http-nio-80-exec-5] Exception processing template "<!DOCTYPE html>
+ <html>
+ <head>
+   [...]t type="text/javascript" src="js/twoFactorAuth.js"></script>
+ </body>
+ </html>
+ ": Error resolving template [<!DOCTYPE html>
 <html>
 <head>
    <meta charset="UTF-8">
@@ -4798,7 +4804,13 @@ org.thymeleaf.exceptions.TemplateInputException: Error resolving template [<!DOC
 	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.base/java.lang.Thread.run(Thread.java:829)
-2021-11-03 13:41:11,662 ERROR org.thymeleaf.TemplateEngine [http-nio-80-exec-6] [THYMELEAF][http-nio-80-exec-6] Exception processing template "<!DOCTYPE html> <html> <head>   [...]t type="text/javascript" src="js/twoFactorAuth.js"></script> </body> </html> ": Error resolving template [<!DOCTYPE html>
+2021-11-03 13:41:11,662 ERROR org.thymeleaf.TemplateEngine [http-nio-80-exec-6] [THYMELEAF][http-nio-80-exec-6] Exception processing template "<!DOCTYPE html>
+ <html>
+ <head>
+   [...]t type="text/javascript" src="js/twoFactorAuth.js"></script>
+ </body>
+ </html>
+ ": Error resolving template [<!DOCTYPE html>
 <html>
 <head>
    <meta charset="UTF-8">
@@ -7998,7 +8010,13 @@ org.thymeleaf.exceptions.TemplateInputException: Error resolving template [<!DOC
 	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.base/java.lang.Thread.run(Thread.java:829)
-2021-11-03 13:41:11,873 ERROR org.thymeleaf.TemplateEngine [http-nio-80-exec-7] [THYMELEAF][http-nio-80-exec-7] Exception processing template "<!DOCTYPE html> <html> <head>   [...]t type="text/javascript" src="js/twoFactorAuth.js"></script> </body> </html> ": Error resolving template [<!DOCTYPE html>
+2021-11-03 13:41:11,873 ERROR org.thymeleaf.TemplateEngine [http-nio-80-exec-7] [THYMELEAF][http-nio-80-exec-7] Exception processing template "<!DOCTYPE html>
+ <html>
+ <head>
+   [...]t type="text/javascript" src="js/twoFactorAuth.js"></script>
+ </body>
+ </html>
+ ": Error resolving template [<!DOCTYPE html>
 <html>
 <head>
    <meta charset="UTF-8">
@@ -11508,8 +11526,8 @@ java.net.ConnectException: Connection refused: connect
 	at org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:776)
 	at org.springframework.web.client.RestTemplate.execute(RestTemplate.java:711)
 	at org.springframework.web.client.RestTemplate.exchange(RestTemplate.java:602)
-	at com.example.crud.controller.GatewayRestController.userPage(GatewayRestController.java:49)
-	at com.example.crud.controller.GatewayRestController$$FastClassBySpringCGLIB$$fc584a81.invoke(<generated>)
+	at com.example.front.controller.GatewayRestController.userPage(GatewayRestController.java:49)
+	at com.example.front.controller.GatewayRestController$$FastClassBySpringCGLIB$$fc584a81.invoke(<generated>)
 	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218)
 	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:779)
 	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
@@ -11518,7 +11536,7 @@ java.net.ConnectException: Connection refused: connect
 	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
 	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:750)
 	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:692)
-	at com.example.crud.controller.GatewayRestController$$EnhancerBySpringCGLIB$$44ecac03.userPage(<generated>)
+	at com.example.front.controller.GatewayRestController$$EnhancerBySpringCGLIB$$44ecac03.userPage(<generated>)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -11636,8 +11654,8 @@ java.net.ConnectException: Connection refused: connect
 	at org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:776)
 	at org.springframework.web.client.RestTemplate.execute(RestTemplate.java:711)
 	at org.springframework.web.client.RestTemplate.exchange(RestTemplate.java:602)
-	at com.example.crud.controller.GatewayRestController.userPage(GatewayRestController.java:49)
-	at com.example.crud.controller.GatewayRestController$$FastClassBySpringCGLIB$$fc584a81.invoke(<generated>)
+	at com.example.front.controller.GatewayRestController.userPage(GatewayRestController.java:49)
+	at com.example.front.controller.GatewayRestController$$FastClassBySpringCGLIB$$fc584a81.invoke(<generated>)
 	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218)
 	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:779)
 	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
@@ -11646,7 +11664,7 @@ java.net.ConnectException: Connection refused: connect
 	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
 	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:750)
 	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:692)
-	at com.example.crud.controller.GatewayRestController$$EnhancerBySpringCGLIB$$44ecac03.userPage(<generated>)
+	at com.example.front.controller.GatewayRestController$$EnhancerBySpringCGLIB$$44ecac03.userPage(<generated>)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -11764,8 +11782,8 @@ java.net.ConnectException: Connection refused: connect
 	at org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:776)
 	at org.springframework.web.client.RestTemplate.execute(RestTemplate.java:711)
 	at org.springframework.web.client.RestTemplate.exchange(RestTemplate.java:602)
-	at com.example.crud.controller.GatewayRestController.userPage(GatewayRestController.java:49)
-	at com.example.crud.controller.GatewayRestController$$FastClassBySpringCGLIB$$fc584a81.invoke(<generated>)
+	at com.example.front.controller.GatewayRestController.userPage(GatewayRestController.java:49)
+	at com.example.front.controller.GatewayRestController$$FastClassBySpringCGLIB$$fc584a81.invoke(<generated>)
 	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218)
 	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:779)
 	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
@@ -11774,7 +11792,7 @@ java.net.ConnectException: Connection refused: connect
 	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
 	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:750)
 	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:692)
-	at com.example.crud.controller.GatewayRestController$$EnhancerBySpringCGLIB$$44ecac03.userPage(<generated>)
+	at com.example.front.controller.GatewayRestController$$EnhancerBySpringCGLIB$$44ecac03.userPage(<generated>)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -11892,8 +11910,8 @@ java.net.ConnectException: Connection refused: connect
 	at org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:776)
 	at org.springframework.web.client.RestTemplate.execute(RestTemplate.java:711)
 	at org.springframework.web.client.RestTemplate.exchange(RestTemplate.java:602)
-	at com.example.crud.controller.GatewayRestController.userPage(GatewayRestController.java:49)
-	at com.example.crud.controller.GatewayRestController$$FastClassBySpringCGLIB$$fc584a81.invoke(<generated>)
+	at com.example.front.controller.GatewayRestController.userPage(GatewayRestController.java:49)
+	at com.example.front.controller.GatewayRestController$$FastClassBySpringCGLIB$$fc584a81.invoke(<generated>)
 	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218)
 	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:779)
 	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
@@ -11902,7 +11920,7 @@ java.net.ConnectException: Connection refused: connect
 	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
 	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:750)
 	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:692)
-	at com.example.crud.controller.GatewayRestController$$EnhancerBySpringCGLIB$$44ecac03.userPage(<generated>)
+	at com.example.front.controller.GatewayRestController$$EnhancerBySpringCGLIB$$44ecac03.userPage(<generated>)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -12020,8 +12038,8 @@ java.net.ConnectException: Connection refused: connect
 	at org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:776)
 	at org.springframework.web.client.RestTemplate.execute(RestTemplate.java:711)
 	at org.springframework.web.client.RestTemplate.exchange(RestTemplate.java:602)
-	at com.example.crud.controller.GatewayRestController.userPage(GatewayRestController.java:49)
-	at com.example.crud.controller.GatewayRestController$$FastClassBySpringCGLIB$$fc584a81.invoke(<generated>)
+	at com.example.front.controller.GatewayRestController.userPage(GatewayRestController.java:49)
+	at com.example.front.controller.GatewayRestController$$FastClassBySpringCGLIB$$fc584a81.invoke(<generated>)
 	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218)
 	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:779)
 	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
@@ -12030,7 +12048,7 @@ java.net.ConnectException: Connection refused: connect
 	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
 	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:750)
 	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:692)
-	at com.example.crud.controller.GatewayRestController$$EnhancerBySpringCGLIB$$44ecac03.userPage(<generated>)
+	at com.example.front.controller.GatewayRestController$$EnhancerBySpringCGLIB$$44ecac03.userPage(<generated>)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -12148,8 +12166,8 @@ java.net.ConnectException: Connection refused: connect
 	at org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:776)
 	at org.springframework.web.client.RestTemplate.execute(RestTemplate.java:711)
 	at org.springframework.web.client.RestTemplate.exchange(RestTemplate.java:602)
-	at com.example.crud.controller.GatewayRestController.userPage(GatewayRestController.java:49)
-	at com.example.crud.controller.GatewayRestController$$FastClassBySpringCGLIB$$fc584a81.invoke(<generated>)
+	at com.example.front.controller.GatewayRestController.userPage(GatewayRestController.java:49)
+	at com.example.front.controller.GatewayRestController$$FastClassBySpringCGLIB$$fc584a81.invoke(<generated>)
 	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218)
 	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:779)
 	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
@@ -12158,7 +12176,7 @@ java.net.ConnectException: Connection refused: connect
 	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
 	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:750)
 	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:692)
-	at com.example.crud.controller.GatewayRestController$$EnhancerBySpringCGLIB$$44ecac03.userPage(<generated>)
+	at com.example.front.controller.GatewayRestController$$EnhancerBySpringCGLIB$$44ecac03.userPage(<generated>)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -12317,8 +12335,8 @@ java.net.ConnectException: Connection refused: connect
 	at org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:776)
 	at org.springframework.web.client.RestTemplate.execute(RestTemplate.java:711)
 	at org.springframework.web.client.RestTemplate.exchange(RestTemplate.java:602)
-	at com.example.crud.controller.GatewayRestController.userPage(GatewayRestController.java:49)
-	at com.example.crud.controller.GatewayRestController$$FastClassBySpringCGLIB$$fc584a81.invoke(<generated>)
+	at com.example.front.controller.GatewayRestController.userPage(GatewayRestController.java:49)
+	at com.example.front.controller.GatewayRestController$$FastClassBySpringCGLIB$$fc584a81.invoke(<generated>)
 	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218)
 	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:779)
 	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
@@ -12327,7 +12345,7 @@ java.net.ConnectException: Connection refused: connect
 	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
 	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:750)
 	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:692)
-	at com.example.crud.controller.GatewayRestController$$EnhancerBySpringCGLIB$$8a22152c.userPage(<generated>)
+	at com.example.front.controller.GatewayRestController$$EnhancerBySpringCGLIB$$8a22152c.userPage(<generated>)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -12445,8 +12463,8 @@ java.net.ConnectException: Connection refused: connect
 	at org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:776)
 	at org.springframework.web.client.RestTemplate.execute(RestTemplate.java:711)
 	at org.springframework.web.client.RestTemplate.exchange(RestTemplate.java:602)
-	at com.example.crud.controller.GatewayRestController.userPage(GatewayRestController.java:49)
-	at com.example.crud.controller.GatewayRestController$$FastClassBySpringCGLIB$$fc584a81.invoke(<generated>)
+	at com.example.front.controller.GatewayRestController.userPage(GatewayRestController.java:49)
+	at com.example.front.controller.GatewayRestController$$FastClassBySpringCGLIB$$fc584a81.invoke(<generated>)
 	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218)
 	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:779)
 	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
@@ -12455,7 +12473,7 @@ java.net.ConnectException: Connection refused: connect
 	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
 	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:750)
 	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:692)
-	at com.example.crud.controller.GatewayRestController$$EnhancerBySpringCGLIB$$8a22152c.userPage(<generated>)
+	at com.example.front.controller.GatewayRestController$$EnhancerBySpringCGLIB$$8a22152c.userPage(<generated>)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -12573,8 +12591,8 @@ java.net.ConnectException: Connection refused: connect
 	at org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:776)
 	at org.springframework.web.client.RestTemplate.execute(RestTemplate.java:711)
 	at org.springframework.web.client.RestTemplate.exchange(RestTemplate.java:602)
-	at com.example.crud.controller.GatewayRestController.userPage(GatewayRestController.java:49)
-	at com.example.crud.controller.GatewayRestController$$FastClassBySpringCGLIB$$fc584a81.invoke(<generated>)
+	at com.example.front.controller.GatewayRestController.userPage(GatewayRestController.java:49)
+	at com.example.front.controller.GatewayRestController$$FastClassBySpringCGLIB$$fc584a81.invoke(<generated>)
 	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218)
 	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:779)
 	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
@@ -12583,7 +12601,7 @@ java.net.ConnectException: Connection refused: connect
 	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
 	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:750)
 	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:692)
-	at com.example.crud.controller.GatewayRestController$$EnhancerBySpringCGLIB$$8a22152c.userPage(<generated>)
+	at com.example.front.controller.GatewayRestController$$EnhancerBySpringCGLIB$$8a22152c.userPage(<generated>)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -12701,8 +12719,8 @@ java.net.ConnectException: Connection refused: connect
 	at org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:776)
 	at org.springframework.web.client.RestTemplate.execute(RestTemplate.java:711)
 	at org.springframework.web.client.RestTemplate.exchange(RestTemplate.java:602)
-	at com.example.crud.controller.GatewayRestController.userPage(GatewayRestController.java:49)
-	at com.example.crud.controller.GatewayRestController$$FastClassBySpringCGLIB$$fc584a81.invoke(<generated>)
+	at com.example.front.controller.GatewayRestController.userPage(GatewayRestController.java:49)
+	at com.example.front.controller.GatewayRestController$$FastClassBySpringCGLIB$$fc584a81.invoke(<generated>)
 	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218)
 	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:779)
 	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
@@ -12711,7 +12729,7 @@ java.net.ConnectException: Connection refused: connect
 	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
 	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:750)
 	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:692)
-	at com.example.crud.controller.GatewayRestController$$EnhancerBySpringCGLIB$$8a22152c.userPage(<generated>)
+	at com.example.front.controller.GatewayRestController$$EnhancerBySpringCGLIB$$8a22152c.userPage(<generated>)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -12829,8 +12847,8 @@ java.net.ConnectException: Connection refused: connect
 	at org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:776)
 	at org.springframework.web.client.RestTemplate.execute(RestTemplate.java:711)
 	at org.springframework.web.client.RestTemplate.exchange(RestTemplate.java:602)
-	at com.example.crud.controller.GatewayRestController.userPage(GatewayRestController.java:49)
-	at com.example.crud.controller.GatewayRestController$$FastClassBySpringCGLIB$$fc584a81.invoke(<generated>)
+	at com.example.front.controller.GatewayRestController.userPage(GatewayRestController.java:49)
+	at com.example.front.controller.GatewayRestController$$FastClassBySpringCGLIB$$fc584a81.invoke(<generated>)
 	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218)
 	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:779)
 	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
@@ -12839,7 +12857,7 @@ java.net.ConnectException: Connection refused: connect
 	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
 	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:750)
 	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:692)
-	at com.example.crud.controller.GatewayRestController$$EnhancerBySpringCGLIB$$8a22152c.userPage(<generated>)
+	at com.example.front.controller.GatewayRestController$$EnhancerBySpringCGLIB$$8a22152c.userPage(<generated>)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -12957,8 +12975,8 @@ java.net.ConnectException: Connection refused: connect
 	at org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:776)
 	at org.springframework.web.client.RestTemplate.execute(RestTemplate.java:711)
 	at org.springframework.web.client.RestTemplate.exchange(RestTemplate.java:602)
-	at com.example.crud.controller.GatewayRestController.userPage(GatewayRestController.java:49)
-	at com.example.crud.controller.GatewayRestController$$FastClassBySpringCGLIB$$fc584a81.invoke(<generated>)
+	at com.example.front.controller.GatewayRestController.userPage(GatewayRestController.java:49)
+	at com.example.front.controller.GatewayRestController$$FastClassBySpringCGLIB$$fc584a81.invoke(<generated>)
 	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218)
 	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:779)
 	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
@@ -12967,7 +12985,7 @@ java.net.ConnectException: Connection refused: connect
 	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
 	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:750)
 	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:692)
-	at com.example.crud.controller.GatewayRestController$$EnhancerBySpringCGLIB$$8a22152c.userPage(<generated>)
+	at com.example.front.controller.GatewayRestController$$EnhancerBySpringCGLIB$$8a22152c.userPage(<generated>)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)

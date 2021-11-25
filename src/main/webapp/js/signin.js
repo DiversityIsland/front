@@ -1,12 +1,10 @@
-// function signin() {
-//    const requestForLogin = $.ajax("/login", {
-//       method: 'POST',
-//       data: {
-//          j_username: document.getElementById('username_input').value,
-//          j_password: document.getElementById('password_input').value,
-//          code: document.getElementById('verification_code_input').value
-//       }
-//    })
-//
-//    requestForLogin.done(() => location.reload())
-// }
+function signin() {
+   const requestForLogin = $.ajax("/api/auth", {
+      method: 'POST',
+      data: {
+         username: document.getElementById('username_input').value,
+         password: document.getElementById('password_input').value,
+      }
+   })
+   requestForLogin.done(() => location.reload())
+}
