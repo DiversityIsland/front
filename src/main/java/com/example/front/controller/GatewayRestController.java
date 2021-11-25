@@ -15,7 +15,6 @@ public class GatewayRestController {
     public ResponseEntity<String> allModeratedShops() {
         return getJSON(backServerAddress+"/shops/");
     }
-
 }
 
 
