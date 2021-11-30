@@ -8,19 +8,10 @@ package com.example.front.jwt;
         import javax.servlet.http.HttpServletRequest;
         import javax.servlet.http.HttpServletResponse;
 
-        import java.util.List;
-
 
 @RestController
 @RequestMapping("/api")
 public class AuthServerController {
-    /*
-     * заглушка юзера использующаяся только на "сервере авторизации"
-     * в фронт приложение передается в виде JSON
-     * */
-    // private static UserCredentials user = new UserCredentials("ADMIN", List.of("ROLE_ADMIN"));
-
-
     /*
     * используется при авторизации через "Вход"
     * http://localhost/api/authserver?username=ADMIN&password=ADMIN

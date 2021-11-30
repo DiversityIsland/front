@@ -1,6 +1,5 @@
 package com.example.front.jwt;
 
-import com.google.gson.Gson;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
@@ -15,7 +14,7 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException e)
             throws IOException, ServletException {
-        
+
         response.setContentType("application/json");
         response.setStatus(401);
         response.getWriter().println("Invalid login or password");

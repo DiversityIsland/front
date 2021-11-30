@@ -1,7 +1,6 @@
 package com.example.front.jwt;
 
 import com.example.front.controller.RestService;
-import com.google.gson.Gson;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.security.core.GrantedAuthority;
