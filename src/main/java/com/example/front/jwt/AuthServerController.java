@@ -18,7 +18,7 @@ public class AuthServerController {
      * заглушка юзера использующаяся только на "сервере авторизации"
      * в фронт приложение передается в виде JSON
      * */
-    private static UserCredentials user = new UserCredentials("ADMIN", List.of("ROLE_ADMIN"));
+    // private static UserCredentials user = new UserCredentials("ADMIN", List.of("ROLE_ADMIN"));
 
 
     /*
