@@ -24,40 +24,30 @@
                         style="vertical-align: inherit;">Магазины</font></font></a></li>
                   <li><a href="#" class="nav-link px-2 text-white"><font style="vertical-align: inherit;"><font
                         style="vertical-align: inherit;">Товары</font></font></a></li>
-<!--                  <li><a href="/favorites" sec:authorize="isAuthenticated()" class="nav-link px-2 text-white" id="linkFavorites" ><font style="vertical-align: inherit;"><font-->
-<!--                        style="vertical-align: inherit;">Избранное</font></font></a></li>-->
+                  <li><a href="/favorites" sec:authorize="hasAnyAuthority('ROLE')" class="nav-link px-2 text-white" id="linkFavorites" ><font style="vertical-align: inherit;"><font
+                        style="vertical-align: inherit;">Избранное</font></font></a></li>
                   <li><a href="#" class="nav-link px-2 text-white"><font style="vertical-align: inherit;"><font
                         style="vertical-align: inherit;">Ещё...</font></font></a></li>
-<!--                  <li><a  href="/moderator" sec:authorize="hasAnyAuthority('MODERATOR')" class="nav-link px-2 text-white">-->
-<!--                     <font style="vertical-align: inherit;">Панель модератора</font></a></li>-->
-<!--                  <li><a  href="/admin" sec:authorize="hasAnyAuthority('ADMIN')" class="nav-link px-2 text-white">-->
-<!--                     <font style="vertical-align: inherit;">Панель администратора</font></a></li>-->
+                  <li><a  href="/moderator" sec:authorize="hasAnyAuthority('ROLE_MODERATOR')" class="nav-link px-2 text-white">
+                     <font style="vertical-align: inherit;">Панель модератора</font></a></li>
+                  <li><a  href="/admin" sec:authorize="hasAnyAuthority('ROLE_ADMIN')" class="nav-link px-2 text-white">
+                     <font style="vertical-align: inherit;">Панель администратора</font></a></li>
                </ul>
 
 
                <div class="text-end">
 
 
-                  <button type="button" id="user_open_modal_btn"
+                  <button sec:authorize="isAnonymous()"  type="button" id="user_open_modal_btn"
                           class="btn btn-outline-light me-2">Войти
                   </button>
-                  <button type="button" id="user_open_modal_reg" class="btn btn-warning">
+                  <button sec:authorize="isAnonymous()" type="button" id="user_open_modal_reg" class="btn btn-warning">
                      Зарегистрироваться
                   </button>
+                  <button sec:authorize="isAuthenticated()" type="button" onclick="location.href = '/api/logout'" class="btn btn-warning">
+                     Выйти
+                  </button>
 
-                  <!--          непонятно кто и c какой целью написал заккоментированный код ниже         <script>-->
-<!--                  <script>-->
-<!--                     $(document).ready(function () {-->
-<!--                        if (window.location.href !== 'http://localhost:8888/') {-->
-<!--                           $('#user_open_modal_btn').hide();-->
-<!--                        }-->
-<!--                     })-->
-<!--                     $(document).ready(function () {-->
-<!--                        if (window.location.href !== 'http://localhost:8888/') {-->
-<!--                           $('#user_open_modal_reg').hide();-->
-<!--                        }-->
-<!--                     })-->
-<!--                  </script>-->
 
 <!--                  &lt;!&ndash;ссылка и информация пользователя при аутентификации&ndash;&gt;-->
 <!--                  <div class="dropdown" sec:authorize="isAuthenticated()" style="position: relative; ">-->

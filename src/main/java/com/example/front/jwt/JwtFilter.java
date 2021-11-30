@@ -1,6 +1,6 @@
 package com.example.front.jwt;
 
-import org.springframework.context.annotation.Configuration;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -10,6 +10,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
 
 import static com.example.front.jwt.CookieUtils.*;
 import static com.example.front.jwt.JwtUtils.*;
@@ -35,6 +37,13 @@ public class JwtFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
+
+        //skip auth filter if user is authorized
+        if ((SecurityContextHolder.getContext().getAuthentication() != null) && (SecurityContextHolder.getContext().getAuthentication().isAuthenticated())) {
+            filterChain.doFilter(request, response);
+            System.out.printf("[Session] %s: %s\n", request.getRequestedSessionId(), request.getRequestURL());
+            return;
+        }
 
         int remotePort = request.getRemotePort();
         //skip auth if user has no JWT token
@@ -62,9 +71,14 @@ public class JwtFilter extends OncePerRequestFilter {
         }
 
         if (tokenStatus == TOKEN_VALID) {
-            Long uid = getUserIdFromJwt(jwt);
-            User user = AuthServerController.getById(uid);
-            AuthUser.authUser(request, user.getUsername(), user.getAuthorities());
+            String username = getFieldFromJwt(jwt,"username");
+            String[] roles = getFieldFromJwt(jwt,"roles").split(" ");
+            Collection<GrantedAuthority> authorities = new ArrayList<>();
+            for (String role : roles) {
+                authorities.add(() -> role);
+            }
+
+            AuthUser.authUser(request, username, authorities);
         }
         filterChain.doFilter(request, response);
     }
