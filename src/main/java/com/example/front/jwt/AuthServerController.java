@@ -28,7 +28,7 @@ public class AuthServerController {
     * */
     @GetMapping("/authserver")
     public String jwtAuth(HttpServletResponse response, HttpServletRequest request, @RequestParam("username") String username, @RequestParam("password") String password)
-    {
+    {//Jackson ObjectMapper  reaDVALUE
             //todo заглушка на сервер авторизации
         //return user;
         return "{\"id\":\"1\",\"username\":\"ADMIN\",\"roles\":[\"ROLE_ADMIN\",\"ROLE_USER\"],\"error\":\"\"}";
