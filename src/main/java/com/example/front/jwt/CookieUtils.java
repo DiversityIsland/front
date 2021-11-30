@@ -1,30 +1,24 @@
 package com.example.front.jwt;
 
+import org.springframework.web.util.WebUtils;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
 
 public class CookieUtils {
-
-    public static String getCookieFromRequest(HttpServletRequest request, String name) {
-        Cookie[] cookies = request.getCookies();
-        if (cookies!=null)
-            for (Cookie cookie: cookies) {
-                if (cookie.getName().equals(name)){
-                    return cookie.getValue();
-                }
-            }
-        return null;
-    }
-
     static Cookie setCookie(String name, String value, int age) {
         Cookie cookie = new Cookie(name, value);
-        cookie.setDomain("localhost");
-        cookie.setPath("/");
-        cookie.setMaxAge(age);
         cookie.setSecure(true);
         cookie.setHttpOnly(true);
+        cookie.setMaxAge(age);
+        cookie.setDomain("localhost");
+        cookie.setPath("/");
         return cookie;
     }
 
+    public static String getCookieFromRequest(HttpServletRequest httpServletRequest, String name) {
+        Cookie cookie = WebUtils.getCookie(httpServletRequest, name);
+        return cookie != null ? cookie.getValue() : null;
+    }
 }

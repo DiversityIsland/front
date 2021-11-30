@@ -2,6 +2,7 @@ package com.example.front.jwt;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;
@@ -14,7 +15,7 @@ import static com.example.front.jwt.CookieUtils.*;
 import static com.example.front.jwt.JwtUtils.*;
 import static com.example.front.jwt.JwtUtils.JwtTokenStatus.*;
 
-@Configuration
+@Component
 public class JwtFilter extends OncePerRequestFilter {
 
     private String updateJwtToken(String jwr) {
