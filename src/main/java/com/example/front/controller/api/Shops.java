@@ -9,11 +9,10 @@ import static com.example.front.controller.api.Constants.BACK_SERVER_ADDRESS;
 
 @RestController
 @RequestMapping("/")
-public class Product {
+public class Shops {
 
-    @GetMapping("/product/{id}")
-    public ResponseEntity<String> getCheckItem(@PathVariable long id) {
-        return getJSON(BACK_SERVER_ADDRESS + "/product/" + id);
+    @GetMapping("/shops")
+    public ResponseEntity<String> allModeratedShops() {
+        return getJSON(BACK_SERVER_ADDRESS + "/shops/");
     }
-
 }

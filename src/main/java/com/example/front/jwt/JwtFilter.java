@@ -1,5 +1,6 @@
 package com.example.front.jwt;
 
+import com.example.front.Clog;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
@@ -22,14 +23,16 @@ public class JwtFilter extends OncePerRequestFilter {
 
     private String updateJwtToken(String jwr) {
         JwtTokenStatus tokenRefreshStatus = checkToken(jwr);
-        System.out.printf("Token status: %s\n", tokenRefreshStatus);
+
+        Clog.status_minor.log(String.format("Token status: %s", tokenRefreshStatus));
 
         if (tokenRefreshStatus == TOKEN_VALID) {
             Long uid = getUserIdFromJwt(jwr);
             String username = getFieldFromJwt(jwr, "username");
-            return generateAccessToken(uid, username, 86400);
+            Collection<GrantedAuthority> roles = getRolesFromJwt(jwr);
+            return generateAccessToken(uid, username, roles, 86400);
         } else {
-            System.out.printf("Update JWT failed: JWR is %s\n", tokenRefreshStatus);
+            Clog.status_minor.log(String.format("Update JWT failed: JWR is %s", tokenRefreshStatus));
         }
         return "";
     }
@@ -41,7 +44,7 @@ public class JwtFilter extends OncePerRequestFilter {
         //skip auth filter if user is authorized
         if ((SecurityContextHolder.getContext().getAuthentication() != null) && (SecurityContextHolder.getContext().getAuthentication().isAuthenticated())) {
             filterChain.doFilter(request, response);
-            System.out.printf("[Session] %s: %s\n", request.getRequestedSessionId(), request.getRequestURL());
+            Clog.status_minor.log(String.format("[Session present] %s", request.getRequestURL()));
             return;
         }
 
@@ -50,20 +53,20 @@ public class JwtFilter extends OncePerRequestFilter {
         String jwt = getCookieFromRequest(request, "JWT");
         String jwr = getCookieFromRequest(request, "JWR");
         if ((jwt == null) && (jwr == null)) {
-            System.out.printf("[%s] No JWT token\n", remotePort);
+            Clog.status_minor.log(String.format("[%s] No JWT token", remotePort));
             filterChain.doFilter(request, response);
             return;
         }
 
-        System.out.printf("[Filter] %s %s [%s<-%s:%s] User %s, session: %s\n",
-                request.getMethod(), request.getRequestURL(), request.getLocalPort(), request.getRemoteHost(), request.getRemotePort(), request.getRemoteUser(), request.getRequestedSessionId());
+        Clog.status_minor.log(String.format("[Filter] %s %s [%s<-%s:%s] User %s",
+                request.getMethod(), request.getRequestURL(), request.getLocalPort(), request.getRemoteHost(), request.getRemotePort(), request.getRemoteUser()));
 
         if (jwt == null) {
             jwt = updateJwtToken(jwr);
         }
 
         JwtTokenStatus tokenStatus = checkToken(jwt);
-        System.out.printf("[%s] Token status: %s\n", remotePort, tokenStatus);
+        Clog.status_minor.log(String.format("[%s] Token status: %s", remotePort, tokenStatus));
 
         if (tokenStatus == TOKEN_EXPIRED) {
             jwt = updateJwtToken(jwr);
@@ -72,13 +75,8 @@ public class JwtFilter extends OncePerRequestFilter {
 
         if (tokenStatus == TOKEN_VALID) {
             String username = getFieldFromJwt(jwt,"username");
-            String[] roles = getFieldFromJwt(jwt,"roles").split(" ");
-            Collection<GrantedAuthority> authorities = new ArrayList<>();
-            for (String role : roles) {
-                authorities.add(() -> role);
-            }
-
-            AuthUser.authUser(request, username, authorities);
+            Collection<GrantedAuthority> roles = getRolesFromJwt(jwt);
+            AuthUser.authUser(request, username, roles);
         }
         filterChain.doFilter(request, response);
     }

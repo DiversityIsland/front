@@ -7,6 +7,10 @@ import javax.servlet.http.HttpServletRequest;
 
 
 public class CookieUtils {
+
+    private CookieUtils() {
+    }
+
     static Cookie setCookie(String name, String value, int age) {
         Cookie cookie = new Cookie(name, value);
         cookie.setSecure(true);

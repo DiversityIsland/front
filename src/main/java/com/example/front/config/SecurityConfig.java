@@ -21,6 +21,7 @@ public class SecurityConfig {
     @Configuration
     public class ApiWebSecurityConfigurationAdapter extends WebSecurityConfigurerAdapter {
 
+        @Override
         protected void configure(HttpSecurity http) throws Exception {
             http
                     .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)

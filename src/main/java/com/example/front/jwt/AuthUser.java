@@ -11,6 +11,9 @@ import java.util.Collection;
 
 public class AuthUser {
 
+    private AuthUser() {
+    }
+
     public static void authUser(HttpServletRequest request, String username, Collection<? extends GrantedAuthority> roles) {
 
         UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(new UserPrincipal(username), null, roles);

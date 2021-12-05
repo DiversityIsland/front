@@ -1,14 +1,21 @@
 package com.example.front.jwt;
 
+import com.example.front.Clog;
 import io.jsonwebtoken.*;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Component;
 
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 
 @Component
 public class JwtUtils {
-    public static final String jwtSecret = "your-256-bit-secret";
+    private static final String JWT_SECRET = "your-256-bit-secret";
 
     enum JwtTokenStatus {
         TOKEN_VALID,
@@ -19,18 +26,18 @@ public class JwtUtils {
         TOKEN_UNSUPPORTED
     }
 
-    public static String generateAccessToken(Long id, String username, int maxAgeInSec) {
+    public static String generateAccessToken(Long id, String username, Collection<GrantedAuthority> roles, int maxAgeInSec) {
         Date now = new Date(System.currentTimeMillis());
         Date expiry = new Date(now.getTime() + maxAgeInSec * 1000L);
         return Jwts.builder()
                 .setSubject(id.toString())
                 .claim("username", username)
-                .claim("roles", "ADMIN USER")
+                .claim("roles", roles)
                 .setIssuedAt(now)
                 .setExpiration(expiry)
                 .setIssuer("token-issuer")
                 .setAudience("partner_id")
-                .signWith(SignatureAlgorithm.HS256, jwtSecret.getBytes(StandardCharsets.UTF_8)) // new byte[]{'a','s'}
+                .signWith(SignatureAlgorithm.HS256, JWT_SECRET.getBytes(StandardCharsets.UTF_8))
                 .compact();
     }
 
@@ -41,31 +48,32 @@ public class JwtUtils {
         String token = Jwts.builder()
                 .setSubject(id.toString())
                 .claim("username", username)
+                .claim("roles", getRolesFromString("ROLE_ADMIN","ROLE_USER"))
                 .setExpiration(expiry)
-                .signWith(SignatureAlgorithm.HS256, jwtSecret.getBytes(StandardCharsets.UTF_8))
+                .signWith(SignatureAlgorithm.HS256, JWT_SECRET.getBytes(StandardCharsets.UTF_8))
                 .compact();
         return new RefreshToken(token, id.toString(), username, expiry);
     }
 
     public static Long getUserIdFromJwt(String token) {
-        Claims claim = Jwts.parser().setSigningKey(jwtSecret.getBytes(StandardCharsets.UTF_8)).parseClaimsJws(token).getBody();
+        Claims claim = Jwts.parser().setSigningKey(JWT_SECRET.getBytes(StandardCharsets.UTF_8)).parseClaimsJws(token).getBody();
         String id;
         try {
             id = claim.getSubject();
         } catch (Exception e) {
-            System.out.println("[Filter] JWT token has no subject");
+            Clog.status_minor.log("[Filter] JWT token has no subject");
             return 0L;
         }
         return Long.parseLong(id);
     }
 
     public static String getFieldFromJwt(String token, String field) {
-        Claims claim = Jwts.parser().setSigningKey(jwtSecret.getBytes(StandardCharsets.UTF_8)).parseClaimsJws(token).getBody();
+        Claims claim = Jwts.parser().setSigningKey(JWT_SECRET.getBytes(StandardCharsets.UTF_8)).parseClaimsJws(token).getBody();
         String username;
         try {
             username = claim.get(field).toString();
         } catch (Exception e) {
-            System.out.printf("[Filter] JWT token has no %s\n", field);
+            Clog.status_minor.log(String.format("[Filter] JWT token has no %s", field));
             return "";
         }
         return username;
@@ -73,27 +81,61 @@ public class JwtUtils {
 
     public static JwtTokenStatus checkToken(String token) {
         try {
-            Claims claims = Jwts.parser().setSigningKey(jwtSecret.getBytes(StandardCharsets.UTF_8)).parseClaimsJws(token).getBody();
-            System.out.println(claims.toString());
+            Claims claims = Jwts.parser().setSigningKey(JWT_SECRET.getBytes(StandardCharsets.UTF_8)).parseClaimsJws(token).getBody();
+            Clog.status_minor.log(claims.toString());
             long expiresIn = (claims.getExpiration().getTime() - System.currentTimeMillis()) / 1000;
-            System.out.printf("[token] expires in %ss %s\n", expiresIn, token);
+            Clog.status.log(String.format("[token] expires in %ss %s", expiresIn, token));
             return JwtTokenStatus.TOKEN_VALID;
         } catch (ExpiredJwtException e) {
-            System.out.println("[Filter] JWT token expired");
+            Clog.status.log("[Filter] JWT token expired");
             return JwtTokenStatus.TOKEN_EXPIRED;
         } catch (MalformedJwtException e) {
-            System.out.println("[Filter] JWT token malformed");
+            Clog.status.log("[Filter] JWT token malformed");
             return JwtTokenStatus.TOKEN_MALFORMED;
         } catch (SignatureException e) {
-            System.out.println("[Filter] JWT token - bad signature");
+            Clog.status.log("[Filter] JWT token - bad signature");
             return JwtTokenStatus.TOKEN_BAD_SIGNATURE;
         } catch (IllegalArgumentException e) {
-            System.out.println("[Filter] JWT token - illegal argument");
+            Clog.status.log("[Filter] JWT token - illegal argument");
             return JwtTokenStatus.TOKEN_ILLEGAL;
         } catch (UnsupportedJwtException e) {
-            System.out.println("[Filter] JWT token unsupported");
+            Clog.status.log("[Filter] JWT token unsupported");
             return JwtTokenStatus.TOKEN_UNSUPPORTED;
         }
+    }
+
+
+    public static Collection<GrantedAuthority> getRolesFromJson (JSONArray rolesJson) {
+        Collection<GrantedAuthority> roles = new ArrayList<>();
+        for (Object role : rolesJson) {
+            roles.add(role::toString);
+        }
+        return roles;
+    }
+
+    private static Collection<GrantedAuthority> getRolesFromString (String... roles) {
+        Collection<GrantedAuthority> result = new ArrayList<>();
+        for (Object role : roles) {
+            result.add(role::toString);
+        }
+        return result;
+    }
+
+    public static Collection<GrantedAuthority> getRolesFromJwt (String token) {
+        Claims claim = Jwts.parser().setSigningKey(JWT_SECRET.getBytes(StandardCharsets.UTF_8)).parseClaimsJws(token).getBody();
+        String strResult;
+        Collection<GrantedAuthority> roles;
+        try {
+
+            strResult = claim.get("roles").toString();
+            System.out.println("ROLES!!! " + strResult);
+            //JSONObject jsonData = new JSONObject("{"+strResult+'}');
+           // System.out.println(jsonData);
+        } catch (Exception e) {
+            Clog.status_minor.log("[Filter] JWT token has no roles");
+            return Collections.emptyList();
+        }
+        return getRolesFromString(strResult);
     }
 
 

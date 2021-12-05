@@ -29,24 +29,20 @@ public class JwtController {
         String usernameAuth = StringUtils.parse(credentials, "username=","&");
         String passwordAuth = StringUtils.parse(credentials, "password=","\n");
 
-        String JSON_DATA = RestService.getJSON("http://localhost/api/authserver?username="+usernameAuth+"&password="+passwordAuth).getBody();
+        String jsonData = RestService.getJSON("http://localhost/api/authserver?username="+usernameAuth+"&password="+passwordAuth).getBody();
 
         //todo корректно ли преобразование
-        final JSONObject user = new JSONObject(JSON_DATA);
+        final JSONObject user = new JSONObject(jsonData);
+
         Long id = Long.parseLong(user.getString("id"));
         String username = user.getString("username");
+        Collection<GrantedAuthority> roles = getRolesFromJson(user.getJSONArray("roles"));
 
-        String accessToken = generateAccessToken(id, username, 300);
+        //TODO !!! remove hardcoded roles
+        String accessToken = generateAccessToken(id, username, roles, 300);
         RefreshToken refreshToken = generateRefreshToken(id, username, 60*60*24*30);
         response.addCookie(setCookie("JWT", accessToken,300));
         response.addCookie(setCookie("JWR", refreshToken.getToken(),60*60*24*30));
-
-        //todo try catch
-        JSONArray rolesJson = user.getJSONArray("roles");
-        Collection<GrantedAuthority> roles = new ArrayList<>();
-        for (Object role : rolesJson) {
-            roles.add(role::toString);
-        }
 
         AuthUser.authUser(request, username, roles);
     }

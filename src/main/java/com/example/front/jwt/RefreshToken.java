@@ -32,6 +32,14 @@ public class RefreshToken {
     this.userId = userId;
     this.userName = userName;
     this.token = token;
+    setExpiryDate(expiryDate);
+  }
+
+  Date getExpiryDate() {
+    return new Date(expiryDate.getTime());
+  }
+
+  void setExpiryDate(Date expiryDate) {
     this.expiryDate = expiryDate;
   }
 }
