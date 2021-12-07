@@ -1,5 +1,6 @@
 package com.example.front.jwt;
 
+import com.example.front.Clog;
 import com.sun.security.auth.UserPrincipal;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
@@ -15,7 +16,7 @@ public class AuthUser {
     }
 
     public static void authUser(HttpServletRequest request, String username, Collection<? extends GrantedAuthority> roles) {
-
+        Clog.status.log("authUser " + roles);
         UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(new UserPrincipal(username), null, roles);
         auth.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
         SecurityContextHolder.getContext().setAuthentication(auth);

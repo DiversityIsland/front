@@ -32,6 +32,8 @@
                      <font style="vertical-align: inherit;">Панель модератора</font></a></li>
                   <li><a  href="/admin" sec:authorize="hasAnyAuthority('ROLE_ADMIN')" class="nav-link px-2 text-white">
                      <font style="vertical-align: inherit;">Панель администратора</font></a></li>
+                  <li><a  href="/user" sec:authorize="hasAnyAuthority('ROLE_USER')" class="nav-link px-2 text-white">
+                     <font style="vertical-align: inherit;">Профиль юзера</font></a></li>
                </ul>
 
 

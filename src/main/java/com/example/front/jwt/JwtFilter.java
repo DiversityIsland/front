@@ -11,7 +11,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Collection;
 
 import static com.example.front.jwt.CookieUtils.*;
@@ -42,10 +41,16 @@ public class JwtFilter extends OncePerRequestFilter {
             throws ServletException, IOException {
 
         //skip auth filter if user is authorized
-        if ((SecurityContextHolder.getContext().getAuthentication() != null) && (SecurityContextHolder.getContext().getAuthentication().isAuthenticated())) {
-            filterChain.doFilter(request, response);
-            Clog.status_minor.log(String.format("[Session present] %s", request.getRequestURL()));
-            return;
+        if (SecurityContextHolder.getContext().getAuthentication() != null) {
+            if (SecurityContextHolder.getContext().getAuthentication().isAuthenticated()){
+                Clog.status_minor.log(String.format("[Session present] %s", request.getRequestURL()));
+                filterChain.doFilter(request, response);
+                return;
+            } else {
+                Clog.status_minor.log(String.format("[No session] %s", request.getRequestURL()));
+            }
+        } else {
+            Clog.status.log("[Filter] SecurityContextHolder.getContext().getAuthentication() is NULL");
         }
 
         int remotePort = request.getRemotePort();
@@ -77,6 +82,7 @@ public class JwtFilter extends OncePerRequestFilter {
             String username = getFieldFromJwt(jwt,"username");
             Collection<GrantedAuthority> roles = getRolesFromJwt(jwt);
             AuthUser.authUser(request, username, roles);
+
         }
         filterChain.doFilter(request, response);
     }

@@ -3,15 +3,11 @@ package com.example.front.jwt;
 import com.example.front.Clog;
 import io.jsonwebtoken.*;
 import org.json.JSONArray;
-import org.json.JSONObject;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Component;
 
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Date;
+import java.util.*;
 
 @Component
 public class JwtUtils {
@@ -110,6 +106,7 @@ public class JwtUtils {
         for (Object role : rolesJson) {
             roles.add(role::toString);
         }
+        Clog.warning.log("getRolesFromJson: " + roles);
         return roles;
     }
 
@@ -118,25 +115,31 @@ public class JwtUtils {
         for (Object role : roles) {
             result.add(role::toString);
         }
+        Clog.warning.log("getRolesFromString: " + result);
         return result;
     }
 
     public static Collection<GrantedAuthority> getRolesFromJwt (String token) {
         Claims claim = Jwts.parser().setSigningKey(JWT_SECRET.getBytes(StandardCharsets.UTF_8)).parseClaimsJws(token).getBody();
         String strResult;
-        Collection<GrantedAuthority> roles;
-        try {
 
+        try {
             strResult = claim.get("roles").toString();
-            System.out.println("ROLES!!! " + strResult);
-            //JSONObject jsonData = new JSONObject("{"+strResult+'}');
-           // System.out.println(jsonData);
         } catch (Exception e) {
             Clog.status_minor.log("[Filter] JWT token has no roles");
             return Collections.emptyList();
         }
-        return getRolesFromString(strResult);
-    }
 
+        Collection<GrantedAuthority> result = new ArrayList<>();
+        StringUtils parser = new StringUtils();
+        String authority;
+        while (!Objects.equals(authority = parser.cut(strResult, "authority=", "}"), ""))
+        {
+            result.add(authority::toString);
+        }
+
+        Clog.status.log("getRolesFromJwt: " + result);
+        return result;
+    }
 
 }

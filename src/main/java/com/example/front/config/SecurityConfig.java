@@ -27,9 +27,9 @@ public class SecurityConfig {
                     .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
                     .exceptionHandling().authenticationEntryPoint(authenticationEntryPoint)
                     .and()
-                    .sessionManagement()
+                    //.sessionManagement()
                     //.sessionCreationPolicy(STATELESS)
-                    .and()
+                    //.and()
                     .formLogin().disable()
                     .csrf().disable()
                     .httpBasic().disable();
