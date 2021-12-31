@@ -63,8 +63,8 @@ async function addCartItem(itemId, shopId) {
 }
 
 
-async function updateFav() {
-    let response = await fetch('/api/favorites');
+async function updateFavItems() {
+    let response = await fetch('/api/favorites/popularItem');
     let items = await response.json();
 
     for (let i = 0; i < items.length; i++) {
@@ -81,8 +81,24 @@ async function updateFav() {
             '                           </div>' +
             '                   </div>';
     }
-
-
 }
-updateFav();
+updateFavItems();
 
+async function updateFavShops() {
+    let response = await fetch('/api/favorites/popularShop');
+    let shops = await response.json();
+    for (let i = 0; i < shops.length; i++) {
+        document.getElementById("shops").innerHTML +=
+            '                   <div class="card" style="width: 18rem; margin-right: 15px; margin-top: 20px; overflow: hidden;">\n' +
+            '                       <img src='+shops[i].logo+' class="card-img-top" alt="popular_shop" style=" height: 180px;">' +
+            '                           <div class="card-body">\n' +
+            '                                <h5 class="card-title">'+shops[i].name+'</h5>' +
+            '                                <p class="card-text">'+shops[i].description+'</p>' +
+            '                                <div class="d-flex">\n' +
+            '                                    <a href="#" class="btn btn-danger">Перейти в магазин</a>' +
+            '                                </div>' +
+            '                           </div>' +
+            '                   </div>';
+    }
+}
+updateFavShops();

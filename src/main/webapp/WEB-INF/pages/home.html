@@ -306,7 +306,7 @@
                                  style="margin-left: 10px;">Смотреть</a>
                            </div>
                            <div class="mt-2 d-flex" th:id="'favoriteButton'+${item.id}">
-                              <!--                                    <button class="btn btn-info btn-block" th:attr="onclick=|addItemToFavorites('${item.id}')|">Добавить в избранное</button>-->
+                              <!--<button class="btn btn-info btn-block" th:attr="onclick=|addItemToFavorites('${item.id}')|">Добавить в избранное</button>-->
                            </div>
                            <div th:name="favItems" th:id="'favItem'+${item.id}"></div>
                         </div>
@@ -321,19 +321,19 @@
                   </h4>
                </div>
 
-               <div class="col-12 d-flex flex-wrap mt-3">
-<!--                  <th:block th:each="shop : ${shops}">-->
-<!--                     <div class="card" style="width: 18rem; margin-right: 15px; margin-top: 20px; overflow: hidden;">-->
-<!--                        <img th:src="${shop.getLogo()}" class="card-img-top" alt="popular_shop"-->
-<!--                             style="height: 180px;">-->
-<!--                        <div class="card-body">-->
-<!--                           <h5 th:text="${shop.getName()}" class="card-title">Заголовок магазины</h5>-->
-<!--                           <p th:text="${shop.getDescription()}" class="card-text">Описание магазина:</p>-->
-<!--                           <a th:href="@{/showcase/{id}(id = ${shop.getId})}" class="btn btn-danger">Перейти в-->
-<!--                              магазин</a>-->
-<!--                        </div>-->
-<!--                     </div>-->
-<!--                  </th:block>-->
+               <div id="shops" class="col-12 d-flex flex-wrap mt-3">
+                  <th:block th:each="shop : ${shops}">
+                     <div class="card" style="width: 18rem; margin-right: 15px; margin-top: 20px; overflow: hidden;">
+                        <img th:src="${shop.getLogo()}" class="card-img-top" alt="popular_shop"
+                             style="height: 180px;">
+                        <div class="card-body">
+                           <h5 th:text="${shop.getName()}" class="card-title">Заголовок магазины</h5>
+                           <p th:text="${shop.getDescription()}" class="card-text">Описание магазина:</p>
+                           <a th:href="@{/showcase/{id}(id = ${shop.getId})}" class="btn btn-danger">Перейти в
+                              магазин</a>
+                        </div>
+                     </div>
+                  </th:block>
                </div>
             </div>
 
