@@ -12,9 +12,14 @@ import static com.example.front.controller.api.Constants.BACK_SERVER_ADDRESS;
 @RequestMapping("/")
 public class Favorites {
 
-    @GetMapping("/api/favorites")
-    public ResponseEntity<String> favoritesPopular() {
+    @GetMapping("/api/favorites/popularItem")
+    public ResponseEntity<String> favoritesPopularItem() {
         return getJSON(BACK_SERVER_ADDRESS + "/api/item/popular/");
+    }
+
+    @GetMapping("/api/favorites/popularShop")
+    public ResponseEntity<String> favoritesPopularShop() {
+        return getJSON(BACK_SERVER_ADDRESS + "/api/shop/popular/");
     }
 
     @GetMapping("/favorites")
