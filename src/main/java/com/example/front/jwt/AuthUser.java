@@ -18,6 +18,9 @@ public class AuthUser {
     public static void authUser(HttpServletRequest request, String username, Collection<? extends GrantedAuthority> roles) {
         Clog.status.log("authUser " + roles);
         UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(new UserPrincipal(username), null, roles);
+
+        System.out.println("AuthUser");
+
         auth.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
         SecurityContextHolder.getContext().setAuthentication(auth);
 

@@ -25,11 +25,13 @@ public class JwtController {
     @PostMapping("/auth")
     public void jwtAuthPost(HttpServletResponse response, HttpServletRequest request, @RequestBody String credentials)
     {
+        System.out.println("JwtController");
         //todo проверить корректность при неверном credentials
         String usernameAuth = StringUtils.parse(credentials, "username=","&");
         String passwordAuth = StringUtils.parse(credentials, "password=","\n");
 
         String jsonData = RestService.getJSON("http://localhost/api/authserver?username="+usernameAuth+"&password="+passwordAuth).getBody();
+        System.out.println("jsonData: " + jsonData);
 
         //todo корректно ли преобразование
         final JSONObject user = new JSONObject(jsonData);
