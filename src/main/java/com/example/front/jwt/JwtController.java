@@ -34,7 +34,6 @@ public class JwtController {
         String passwordAuth = credentials.substring(x+9);
 
         String jsonData = RestService.getJSON("http://localhost/api/authserver?username="+usernameAuth+"&password="+passwordAuth).getBody();
-        System.out.println("jsonData: " + jsonData);
 
         //todo корректно ли преобразование
         final JSONObject user = new JSONObject(jsonData);
