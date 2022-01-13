@@ -32,18 +32,18 @@ public class AuthServerController {
                           @RequestParam("password") String password) {
 
         String url = "http://localhost:8888/authserver?username="+username+"&password="+password;
-        String test = RestService.getJSON(url).getBody();
+        String jsonUrl = RestService.getJSON(url).getBody();
 
-        JSONObject obj = new JSONObject(test);
-        int id = obj.getInt("id");
-        String uname = obj.getString("username");
+        JSONObject jsonObj = new JSONObject(jsonUrl);
+        int id = jsonObj.getInt("id");
+        String uname = jsonObj.getString("username");
 
-        String rolesArr = String.valueOf(obj.get("roles"));
+        String rolesArr = String.valueOf(jsonObj.get("roles"));
         String roles = "";
-        JSONArray obj2 = new JSONArray(rolesArr);
-        Iterator obj2Itr = obj2.iterator();
-        while (obj2Itr.hasNext()){
-            JSONObject test3 = (JSONObject) obj2Itr.next();
+        JSONArray jsonObj2 = new JSONArray(rolesArr);
+        Iterator jsonObj2Itr = jsonObj2.iterator();
+        while (jsonObj2Itr.hasNext()){
+            JSONObject test3 = (JSONObject) jsonObj2Itr.next();
             roles = roles + "\"ROLE_" + test3.get("name") + "\"" + ",";
         }
         return "{\"id\":\"" + id + "\",\"username\":\"" + uname + "\",\"roles\":[" + roles + "],\"error\":\"\"}";
