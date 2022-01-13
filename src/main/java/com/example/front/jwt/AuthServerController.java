@@ -24,10 +24,11 @@ public class AuthServerController {
      * http://localhost/api/authserver?username=ADMIN&password=ADMIN
      * контракт: (username, password -> id, username, roles, error)
      * */
+    //Jackson ObjectMapper  reaDVALUE
+
     @GetMapping("/authserver")
     public String jwtAuth(HttpServletResponse response, HttpServletRequest request, @RequestParam("username") String username, @RequestParam("password") String password) {
-        //Jackson ObjectMapper  reaDVALUE
-        //todo заглушка на сервер авторизации
+
         System.out.println("AuthServerController");
         String id = "", uname = "";
         String[] role = new String[4];
@@ -52,19 +53,24 @@ public class AuthServerController {
                 i++;
             }
             conn.close();
+            rs.close();
+            stmt.close();
         } catch (Exception e) {
-            System.err.println("Got an exception! ");
+            System.err.println("SQL script got an exception! ");
             System.err.println(e.getMessage());
         }
 
         String finalRole = "";
         for (int i = 0; i<role.length; i++){
-            finalRole = finalRole + "\"" + role[i] + "\",";
+            finalRole = finalRole + "\"ROLE_" + role[i] + "\",";
         }
+        finalRole = finalRole.substring (0, finalRole.length() - 1);
 
-        System.out.println(finalRole);
         return "{\"id\":\"" + id + "\",\"username\":\"" + uname + "\",\"roles\":[" + finalRole + "],\"error\":\"\"}";
-        //return "{\"id\":\"1\",\"username\":\"ADMIN\",\"roles\":[\"ROLE_ADMIN\",\"ROLE_USER\"],\"error\":\"\"}";
+
+        //todo заглушка на сервер авторизации
+       // return "{\"id\":\"1\",\"username\":\"ADMIN\",\"roles\":[\"ROLE_ADMIN\",\"ROLE_USER\"],\"error\":\"\"}";
+
     }
 
 }
