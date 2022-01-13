@@ -38,22 +38,15 @@ public class AuthServerController {
         int id = obj.getInt("id");
         String uname = obj.getString("username");
 
-        JSONArray rolesArr = (JSONArray) obj.get("roles");
-        JSONObject allRoles = null;
-        Iterator rolesItr = rolesArr.iterator();
-        while (rolesItr.hasNext()){
-            allRoles = (JSONObject) rolesItr.next();
+        String rolesArr = String.valueOf(obj.get("roles"));
+        String roles = "";
+        JSONArray obj2 = new JSONArray(rolesArr);
+        Iterator obj2Itr = obj2.iterator();
+        while (obj2Itr.hasNext()){
+            JSONObject test3 = (JSONObject) obj2Itr.next();
+            roles = roles + "\"ROLE_" + test3.get("name") + "\"" + ",";
         }
-
-        System.out.println("rolesarray: " + rolesArr);
-        System.out.println("allroles: " + allRoles.toString());
-
-        Object urole = obj.getJSONArray("roles").get(0);
-        JSONObject obj2 = new JSONObject(urole.toString());
-        String role = obj2.getString("name");
-
-        System.out.println( "JSON id: " + id + " JSON name: " + uname + " JSON role: " + role);
-        return "{\"id\":\"" + id + "\",\"username\":\"" + uname + "\",\"roles\":[\"ROLE_" + role + "\"],\"error\":\"\"}";
+        return "{\"id\":\"" + id + "\",\"username\":\"" + uname + "\",\"roles\":[" + roles + "],\"error\":\"\"}";
 
         //return "{\"id\":\"1\",\"username\":\"ADMIN\",\"roles\":[\"ROLE_ADMIN\",\"ROLE_USER\"],\"error\":\"\"}";
 
