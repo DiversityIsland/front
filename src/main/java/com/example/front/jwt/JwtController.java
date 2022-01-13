@@ -25,10 +25,13 @@ public class JwtController {
     @PostMapping("/auth")
     public void jwtAuthPost(HttpServletResponse response, HttpServletRequest request, @RequestBody String credentials)
     {
-        System.out.println("JwtController");
+        System.out.println("JwtController credentilas: " + credentials);
         //todo проверить корректность при неверном credentials
         String usernameAuth = StringUtils.parse(credentials, "username=","&");
-        String passwordAuth = StringUtils.parse(credentials, "password=","\n");
+        System.out.println("auth user: " + usernameAuth);
+
+        int x = credentials.indexOf("password=");
+        String passwordAuth = credentials.substring(x+9);
 
         String jsonData = RestService.getJSON("http://localhost/api/authserver?username="+usernameAuth+"&password="+passwordAuth).getBody();
         System.out.println("jsonData: " + jsonData);
@@ -41,12 +44,12 @@ public class JwtController {
         Collection<GrantedAuthority> roles = getRolesFromJson(user.getJSONArray("roles"));
 
         //TODO !!! remove hardcoded roles
-        String accessToken = generateAccessToken(id, username, roles, 300);
-        RefreshToken refreshToken = generateRefreshToken(id, username, 60*60*24*30);
+        String accessToken = generateAccessToken(id, usernameAuth, roles, 300);
+        RefreshToken refreshToken = generateRefreshToken(id, usernameAuth, 60*60*24*30);
         response.addCookie(setCookie("JWT", accessToken,300));
         response.addCookie(setCookie("JWR", refreshToken.getToken(),60*60*24*30));
 
-        AuthUser.authUser(request, username, roles);
+        AuthUser.authUser(request, usernameAuth, roles);
     }
 
     //http://localhost/api/logout

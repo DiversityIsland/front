@@ -1,5 +1,7 @@
 package com.example.front.jwt;
 
+import com.example.front.controller.RestService;
+import org.json.JSONObject;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -7,10 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.sql.*;
 
 
 @RestController
@@ -27,49 +27,27 @@ public class AuthServerController {
     //Jackson ObjectMapper  reaDVALUE
 
     @GetMapping("/authserver")
-    public String jwtAuth(HttpServletResponse response, HttpServletRequest request, @RequestParam("username") String username, @RequestParam("password") String password) {
+    public String jwtAuth(HttpServletResponse response, HttpServletRequest request, @RequestParam("username") String username,
+                          @RequestParam("password") String password) {
 
+        String url = "http://localhost:8888/authserver?username="+username+"&password="+password;
+        System.out.println("url string is: " + url);
+        String test = RestService.getJSON(url).getBody();
+
+        JSONObject obj = new JSONObject(test);
+        int id = obj.getInt("id");
+        String uname = obj.getString("username");
+        Object urole = obj.getJSONArray("roles").get(0);
+        System.out.println("JSON ROLES: " + urole);
+        JSONObject obj2 = new JSONObject(urole.toString());
+        String role = obj2.getString("name");
+
+        System.out.println( "JSON id: " + id + " JSON name: " + uname + " JSON role: " + role);
         System.out.println("AuthServerController");
-        String id = "", uname = "";
-        String[] role = new String[4];
-
-        try {
-            String url = "jdbc:mysql://localhost:3306/platform";
-            Connection conn;
-            conn = DriverManager.getConnection(url, "root", "root");
-            Statement stmt = conn.createStatement();
-            ResultSet rs;
-
-            rs = stmt.executeQuery("SELECT platform.user.id, platform.user.username, platform.role.role_name " +
-                    "FROM (platform.user_role INNER JOIN platform.role " +
-                    "ON platform.user_role.role_id = platform.role.id) " +
-                    "INNER JOIN platform.user ON platform.user_role.user_id = platform.user.id " +
-                    "WHERE platform.user.username like \"" + username + "\"");
-            int i = 0;
-            while (rs.next()) {
-                id = rs.getString(1);
-                uname = rs.getString(2);
-                role[i] = rs.getString(3);
-                i++;
-            }
-            conn.close();
-            rs.close();
-            stmt.close();
-        } catch (Exception e) {
-            System.err.println("SQL script got an exception! ");
-            System.err.println(e.getMessage());
-        }
-
-        String finalRole = "";
-        for (int i = 0; i<role.length; i++){
-            finalRole = finalRole + "\"ROLE_" + role[i] + "\",";
-        }
-        finalRole = finalRole.substring (0, finalRole.length() - 1);
-
-        return "{\"id\":\"" + id + "\",\"username\":\"" + uname + "\",\"roles\":[" + finalRole + "],\"error\":\"\"}";
+        return "{\"id\":\"" + id + "\",\"username\":\"" + uname + "\",\"roles\":[\"ROLE_" + role + "\"],\"error\":\"\"}";
 
         //todo заглушка на сервер авторизации
-       // return "{\"id\":\"1\",\"username\":\"ADMIN\",\"roles\":[\"ROLE_ADMIN\",\"ROLE_USER\"],\"error\":\"\"}";
+        //return "{\"id\":\"1\",\"username\":\"ADMIN\",\"roles\":[\"ROLE_ADMIN\",\"ROLE_USER\"],\"error\":\"\"}";
 
     }
 
