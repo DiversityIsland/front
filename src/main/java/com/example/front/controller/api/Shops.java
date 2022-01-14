@@ -11,8 +11,8 @@ import static com.example.front.controller.api.Constants.BACK_SERVER_ADDRESS;
 @RequestMapping("/")
 public class Shops {
 
-    @GetMapping("/shops")
+    @GetMapping("/api/shops")
     public ResponseEntity<String> allModeratedShops() {
-        return getJSON(BACK_SERVER_ADDRESS + "/shops/");
+        return getJSON(BACK_SERVER_ADDRESS + "/api/shop/popular");
     }
 }
