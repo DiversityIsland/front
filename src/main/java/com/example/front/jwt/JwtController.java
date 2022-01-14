@@ -28,11 +28,8 @@ public class JwtController {
         System.out.println("JwtController credentilas: " + credentials);
         //todo проверить корректность при неверном credentials
         String usernameAuth = StringUtils.parse(credentials, "username=","&");
-        System.out.println("auth user: " + usernameAuth);
-
         int x = credentials.indexOf("password=");
         String passwordAuth = credentials.substring(x+9);
-
         String jsonData = RestService.getJSON("http://localhost/api/authserver?username="+usernameAuth+"&password="+passwordAuth).getBody();
 
         //todo корректно ли преобразование

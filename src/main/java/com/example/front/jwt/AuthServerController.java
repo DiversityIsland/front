@@ -30,14 +30,11 @@ public class AuthServerController {
     @GetMapping("/authserver")
     public String jwtAuth(HttpServletResponse response, HttpServletRequest request, @RequestParam("username") String username,
                           @RequestParam("password") String password) {
-
         String url = "http://localhost:8888/authserver?username="+username+"&password="+password;
         String jsonUrl = RestService.getJSON(url).getBody();
-
         JSONObject jsonObj = new JSONObject(jsonUrl);
         int id = jsonObj.getInt("id");
         String uname = jsonObj.getString("username");
-
         String rolesArr = String.valueOf(jsonObj.get("roles"));
         String roles = "";
         JSONArray jsonObj2 = new JSONArray(rolesArr);
@@ -47,9 +44,7 @@ public class AuthServerController {
             roles = roles + "\"ROLE_" + test3.get("name") + "\"" + ",";
         }
         return "{\"id\":\"" + id + "\",\"username\":\"" + uname + "\",\"roles\":[" + roles + "],\"error\":\"\"}";
-
         //return "{\"id\":\"1\",\"username\":\"ADMIN\",\"roles\":[\"ROLE_ADMIN\",\"ROLE_USER\"],\"error\":\"\"}";
-
     }
 
 }
