@@ -2,7 +2,7 @@
 <html xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
    <meta charset="UTF-8">
-   <title>Главная</title>
+   <title id="title">Главная</title>
    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
@@ -18,7 +18,7 @@
    <script src="/js/signin.js"></script>
 </head>
 <body>
-
+   <div id="page" class="page">
 <!--   <div th:if="${param.error}">-->
 <!--      Invalid username and password.-->
 <!--   </div>-->
@@ -26,320 +26,322 @@
 <!--      You have been logged out.-->
 <!--   </div>-->
    <!-- модалка для входа юзеру -->
-   <div class="modal fade" id="user_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-         <div class="modal-content">
-            <div class="modal-header">
-               <h5 class="modal-title">Войдите в систему</h5>
-               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <form id="user_signin_form" action="/login" method="post">
-               <div class="modal-body">
-                  <div class="mb-3">
-                     <label for="username_input" class="form-label">Введите email:</label>
-                     <input id="username_input" type="text" name="j_username" class="form-control"
-                            placeholder="Username">
-                     <div id="username_checker" class="form-text" style="color:#a40000;"></div>
-                  </div>
-                  <div class="mb-3">
-                     <label for="password_input" class="form-label">Введите пароль:</label>
-                     <input id="password_input" type="password" name="j_password" class="form-control"
-                            placeholder="Password">
-                     <div id="password_checker" class="form-text" style="color:#a40000;"></div>
-                  </div>
-                  <div class="mb-3">
-                     <label for="verification_code_input" class="form-label">
-                        Введите код с телефона (если используете 2FA):
-                     </label>
-                     <input id="verification_code_input" type="text" name="code" class="form-control"
-                            placeholder="Verification code">
-                  </div>
-                  <div class="form-check">
-                     <input class="form-check-input" type="checkbox" name="remember-me" id="flexCheckChecked"
-                            checked>
-                     <label class="form-check-label" for="flexCheckChecked">
-                        Запомнить пароль
-                     </label>
-                  </div>
-                  <br>
-                  <p align="center">или войдите с помощью:</p>
-                  <div class="form-group" align="center">
-                     <div class="col-md-3">
-                        <a class="btn btn-outline-dark" href="/oauth2/authorization/google" role="button"
-                           style="text-transform:none">
-                           <img width="20px" style="margin-bottom:3px; margin-right:10px; margin-left:30px"
-                                src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png"/>
-                           Login with google
-                        </a>
+      <div class="modal fade" id="user_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+         <div class="modal-dialog">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <h5 class="modal-title">Войдите в систему</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+               </div>
+               <form id="user_signin_form" action="/login" method="post">
+                  <div class="modal-body">
+                     <div class="mb-3">
+                        <label for="username_input" class="form-label">Введите email:</label>
+                        <input id="username_input" type="text" name="j_username" class="form-control"
+                               placeholder="Username">
+                        <div id="username_checker" class="form-text" style="color:#a40000;"></div>
                      </div>
-                  </div>
-                  <div class="form-group" align="center">
-                     <div class="col-md-3">
-                        <a class="btn btn-outline-dark" href="/oauth2/authorization/github" role="button"
-                           style="text-transform:none" w>
-                           <img width="20px" style="margin-bottom:3px; margin-right:10px; margin-left:30px"
-                                src="https://wodensoft.co.uk/wp-content/uploads/2020/05/Github.png"/>
-                           Login with github
-                        </a>
+                     <div class="mb-3">
+                        <label for="password_input" class="form-label">Введите пароль:</label>
+                        <input id="password_input" type="password" name="j_password" class="form-control"
+                               placeholder="Password">
+                        <div id="password_checker" class="form-text" style="color:#a40000;"></div>
                      </div>
+                     <div class="mb-3">
+                        <label for="verification_code_input" class="form-label">
+                           Введите код с телефона (если используете 2FA):
+                        </label>
+                        <input id="verification_code_input" type="text" name="code" class="form-control"
+                               placeholder="Verification code">
+                     </div>
+                     <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="remember-me" id="flexCheckChecked"
+                               checked>
+                        <label class="form-check-label" for="flexCheckChecked">
+                           Запомнить пароль
+                        </label>
+                     </div>
+                     <br>
+                     <p align="center">или войдите с помощью:</p>
+                     <div class="form-group" align="center">
+                        <div class="col-md-3">
+                           <a class="btn btn-outline-dark" href="/oauth2/authorization/google" role="button"
+                              style="text-transform:none">
+                              <img width="20px" style="margin-bottom:3px; margin-right:10px; margin-left:30px"
+                                   src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png"/>
+                              Login with google
+                           </a>
+                        </div>
+                     </div>
+                     <div class="form-group" align="center">
+                        <div class="col-md-3">
+                           <a class="btn btn-outline-dark" href="/oauth2/authorization/github" role="button"
+                              style="text-transform:none" w>
+                              <img width="20px" style="margin-bottom:3px; margin-right:10px; margin-left:30px"
+                                   src="https://wodensoft.co.uk/wp-content/uploads/2020/05/Github.png"/>
+                              Login with github
+                           </a>
+                        </div>
+                     </div>
+                     <hr>
+                     <p align="center">если вы у нас впервые:</p>
                   </div>
-                  <hr>
-                  <p align="center">если вы у нас впервые:</p>
-               </div>
 
-               <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
-                  <button type="button" id="user_signin_btn" class="btn btn-primary"
-                          onclick="{event.preventDefault(); signin()}">
-                     Войти
-                  </button>
-               </div>
-            </form>
-         </div>
-      </div>
-   </div>
-
-   <!-- Модалка для регистрации -->
-   <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-         <div class="modal-content" style="width:750px;">
-            <div class="modal-body">
-               <div class="box">
-                  <div class="form loginBox">
-<!--                     <b th:text="${usernameExists}">Пользователь с таким username уже существует.</b>-->
-<!--                     <b th:text="${emailExists}">Пользователь с такой электронной почтой уже существует.</b>-->
-
-                     <form>
-                        <div class="row justify-content-center">
-                           <div class="form-group col-6">
-                              <label class="form-label" for="usernameSave">Имя пользователя</label>
-                              <input class="form-control" type="text" value="" id="usernameSave" required
-                                     minlength="4"
-                                     placeholder="Введите имя пользователя">
-                           </div>
-                        </div>
-                        <div class="row justify-content-center">
-                           <div class="form-group col-6">
-                              <label class="form-label" for="emailSave">Адрес электронной почты</label>
-                              <input class="form-control" type="email" value="" id="emailSave"
-                                     pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}"
-                                     title="в формате user@example.com" required
-                                     placeholder="Введите адрес электронной почты">
-                           </div>
-                        </div>
-                        <div class="row justify-content-center">
-                           <div class="form-group col-6">
-                              <label class="form-label" for="passwordSave">Пароль</label>
-                              <input class="form-control" type="password" value="" id="passwordSave" required
-                                     minlength="6"
-                                     placeholder="Введите пароль">
-                           </div>
-                        </div>
-                        <div class="row justify-content-center">
-                           <div class="form-group col-6">
-                              <label class="form-label" for="phoneSave">Номер телефона</label>
-                              <input class="form-control" type="text" value="" id="phoneSave" required
-                                     minlength="11" pattern="[0-9]+"
-                                     title="указать цифрами" placeholder="Введите номер телефона">
-                           </div>
-                        </div>
-                        <div class="row justify-content-center">
-                           <div class="form-group col-6">
-                              <label class="form-label" for="first_nameSave">Имя</label>
-                              <input class="form-control" type="text" value="" id="first_nameSave"
-                                     placeholder="Введите имя">
-                           </div>
-                        </div>
-                        <div class="row justify-content-center">
-                           <div class="form-group col-6">
-                              <label class="form-label" for="last_nameSave">Фамилия</label>
-                              <input class="form-control" type="text" value="" id="last_nameSave"
-                                     placeholder="Введите фамилию">
-                           </div>
-                        </div>
-                        <div class="row justify-content-center">
-                           <div class="form-group col-6">
-                              <label class="form-label" for="ageSave">Возраст</label>
-                              <input class="form-control" type="number" value="" id="ageSave"
-                                     placeholder="Введите возраст">
-                           </div>
-                        </div>
-                        <div class="row justify-content-center">
-                           <div class="form-group col-2">
-                              <label class="form-label" for="countrySave">Страна</label>
-                              <input class="form-control" type="text" value="" id="countrySave"
-                                     placeholder="Введите страну">
-                           </div>
-                           <div class="form-group col-2">
-                              <label class="form-label" for="citySave">Город</label>
-                              <input class="form-control" type="text" value="" id="citySave"
-                                     placeholder="Введите город">
-                           </div>
-                           <div class="form-group col-2">
-                              <label class="form-label" for="cityIndexSave">Индекс города</label>
-                              <input class="form-control" type="text" value="" id="cityIndexSave"
-                                     placeholder="Введите индекс города">
-                           </div>
-                        </div>
-                        <div class="row justify-content-center">
-                           <div class="form-group col-2">
-                              <label class="form-label" for="streetSave">Улица</label>
-                              <input class="form-control" type="text" value="" id="streetSave"
-                                     placeholder="Введите улицу">
-                           </div>
-                           <div class="form-group col-2">
-                              <label class="form-label" for="houseSave">Номер дома</label>
-                              <input class="form-control" type="text" value="" id="houseSave"
-                                     placeholder="Введите номер дома">
-                           </div>
-                           <div class="form-group col-2">
-                              <label class="form-label" for="birthdaySave">Дата рождения</label>
-                              <input class="form-control" type="date" value="" id="birthdaySave">
-                           </div>
-                        </div>
-                        <div class="row justify-content-center">
-                           <div class="form-group col-6">
-                              <label class="form-label" for="genderSave">Выберите пол:</label>
-                              <br>
-                              <select class="form-select" size="3" id="genderSave" name="gender" required="">
-                                 <option id="ManSave" value="MALE">Мужчина</option>
-                                 <option id="WomanSave" value="FEMALE">Женщина</option>
-                                 <option id="NoGenderSave" value="UNKNOWN">Не определен</option>
-                              </select>
-                           </div>
-                        </div>
-                        <div class="row justify-content-center">
-                           <div class="form-group col-6">
-                              <input type="button" class="btn btn-primary" value="Зарегистрироваться"
-                                     onclick="{event.preventDefault(); saveUser()}"/>
-                           </div>
-                        </div>
-                     </form>
+                  <div class="modal-footer">
+                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+                     <button type="button" id="user_signin_btn" class="btn btn-primary"
+                             onclick="{event.preventDefault(); signin()}">
+                        Войти
+                     </button>
                   </div>
-               </div>
-            </div>
-         </div>
-      </div>
-   </div>
-
-   <!--HEADER-->
-   <div th:replace="/includes/header :: header"></div>
-
-   <!--Main zone-->
-   <section class="d-flex">
-      <!--Sidebar-->
-      <div class="bg-light" style="width: 350px; min-height: 100vh; padding-top: 30px; padding-bottom: 200px">
-         <div class="container-fluid">
-            <div class="row">
-               <div class="col-12 d-flex align-items-center">
-                  <h5>Категории</h5>
-               </div>
-
-               <div class="col-12 d-flex justify-content-center">
-                  <hr style="width: 100%; margin: 0;">
-               </div>
-               <!--Категории-->
-               <div class="col-12 mt-4">
-                  <ul id="categories" class="nav nav-pills flex-column mb-auto">
-                     <li class="nav-item">
-                        <a id="popular_show_btn" href="#" class="nav-link active" aria-current="page">Популярное</a>
-                     </li>
-                     <!--Тут home.js генерит кнопки категорий-->
-                  </ul>
-               </div>
-            </div>
-         </div>
-      </div>
-
-      <!--Main Body-->
-      <div class="container-fluid" style="padding-top: 30px; padding-left: 35px; padding-bottom: 40px;">
-         <div class="row">
-            <div class="col-12">
-               <form style="width: 650px;" class="d-flex">
-                  <input id="search_input" type="search" class="form-control" name="search"
-                         placeholder="Поиск по наименованию:">
-                  <button id="search_btn" type="button" class="btn btn-success" style="width: 150px;">Поиск</button>
                </form>
             </div>
-
-<!--             QR and enable 2FA-->
-<!--            <div class="mt-3" sec:authorize="isAuthenticated()">-->
-<!--               <th:block th:if="${qr}">-->
-<!--                  <img th:src="${qr}" alt="qr">-->
-<!--                  <div class="mt-2">-->
-<!--                     <button class="btn btn-primary" type="button" onclick="updateTwoFactorAuth(true)">Включить 2FA</button>-->
-<!--                  </div>-->
-<!--               </th:block>-->
-<!--            </div>-->
-
-         <!--Контейнер для динамического контента (js)-->
-         <div class="collapse" id="dinamic_content">
-            <div class="col-12" style="margin-top: 30px;">
-               <h4 id="dinamic_head"></h4>
-            </div>
-            <!--сюда генерируются товары-->
-            <div class="col-12 d-flex flex-wrap mt-3" id="dinamic_content_inner">
-               </div>
-            </div>
-
-            <!--Контейнер для статического контента (при загрузке страницы)-->
-            <div class="collapse show" id="popular_show_content">
-               <div class="col-12" style="margin-top: 30px;">
-                  <h4>
-                     Популярные товары
-                  </h4>
-               </div>
-               <!--Блок популярные товары-->
-               <div id="items" class="col-12 d-flex flex-wrap mt-3">
-                  <th:block th:each="item : ${items}">
-                     <div class="card" style="width: 18rem; margin-right: 15px; margin-top: 20px;">
-                        <img th:src="${item.getImages()[0]}" class="card-img-top" alt="popular_item"
-                             style="height: 180px;">
-                        <div class="card-body">
-                           <h5 th:text="${item.getName()}" class="card-title">Заголовок товара</h5>
-                           <p th:text="${item.getDescription()}" class="card-text">Описание товара:</p>
-                           <div class="d-flex">
-                              <a href="#" class="btn btn-danger"
-                                 th:attr="onclick=|addCartItem('${item.id}','${item.shopId}')|"
-                                 style="width: 150px;">В корзину</a>
-                              <a th:href="@{/product/{id}(id = ${item.getId()})}" class="btn btn-primary"
-                                 style="margin-left: 10px;">Смотреть</a>
-                           </div>
-                           <div class="mt-2 d-flex" th:id="'favoriteButton'+${item.id}">
-                              <!--                                    <button class="btn btn-info btn-block" th:attr="onclick=|addItemToFavorites('${item.id}')|">Добавить в избранное</button>-->
-                           </div>
-                           <div th:name="favItems" th:id="'favItem'+${item.id}"></div>
-                        </div>
-                     </div>
-                  </th:block>
-
-               </div>
-               <!--Блок популярные магазины-->
-               <div class="col-12" style="margin-top: 30px;">
-                  <h4>
-                     Популярные магазины
-                  </h4>
-               </div>
-
-               <div class="col-12 d-flex flex-wrap mt-3">
-<!--                  <th:block th:each="shop : ${shops}">-->
-<!--                     <div class="card" style="width: 18rem; margin-right: 15px; margin-top: 20px; overflow: hidden;">-->
-<!--                        <img th:src="${shop.getLogo()}" class="card-img-top" alt="popular_shop"-->
-<!--                             style="height: 180px;">-->
-<!--                        <div class="card-body">-->
-<!--                           <h5 th:text="${shop.getName()}" class="card-title">Заголовок магазины</h5>-->
-<!--                           <p th:text="${shop.getDescription()}" class="card-text">Описание магазина:</p>-->
-<!--                           <a th:href="@{/showcase/{id}(id = ${shop.getId})}" class="btn btn-danger">Перейти в-->
-<!--                              магазин</a>-->
-<!--                        </div>-->
-<!--                     </div>-->
-<!--                  </th:block>-->
-               </div>
-            </div>
-
          </div>
       </div>
-   </section>
+
+      <!-- Модалка для регистрации -->
+      <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+         <div class="modal-dialog">
+            <div class="modal-content" style="width:750px;">
+               <div class="modal-body">
+                  <div class="box">
+                     <div class="form loginBox">
+   <!--                     <b th:text="${usernameExists}">Пользователь с таким username уже существует.</b>-->
+   <!--                     <b th:text="${emailExists}">Пользователь с такой электронной почтой уже существует.</b>-->
+
+                        <form>
+                           <div class="row justify-content-center">
+                              <div class="form-group col-6">
+                                 <label class="form-label" for="usernameSave">Имя пользователя</label>
+                                 <input class="form-control" type="text" value="" id="usernameSave" required
+                                        minlength="4"
+                                        placeholder="Введите имя пользователя">
+                              </div>
+                           </div>
+                           <div class="row justify-content-center">
+                              <div class="form-group col-6">
+                                 <label class="form-label" for="emailSave">Адрес электронной почты</label>
+                                 <input class="form-control" type="email" value="" id="emailSave"
+                                        pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}"
+                                        title="в формате user@example.com" required
+                                        placeholder="Введите адрес электронной почты">
+                              </div>
+                           </div>
+                           <div class="row justify-content-center">
+                              <div class="form-group col-6">
+                                 <label class="form-label" for="passwordSave">Пароль</label>
+                                 <input class="form-control" type="password" value="" id="passwordSave" required
+                                        minlength="6"
+                                        placeholder="Введите пароль">
+                              </div>
+                           </div>
+                           <div class="row justify-content-center">
+                              <div class="form-group col-6">
+                                 <label class="form-label" for="phoneSave">Номер телефона</label>
+                                 <input class="form-control" type="text" value="" id="phoneSave" required
+                                        minlength="11" pattern="[0-9]+"
+                                        title="указать цифрами" placeholder="Введите номер телефона">
+                              </div>
+                           </div>
+                           <div class="row justify-content-center">
+                              <div class="form-group col-6">
+                                 <label class="form-label" for="first_nameSave">Имя</label>
+                                 <input class="form-control" type="text" value="" id="first_nameSave"
+                                        placeholder="Введите имя">
+                              </div>
+                           </div>
+                           <div class="row justify-content-center">
+                              <div class="form-group col-6">
+                                 <label class="form-label" for="last_nameSave">Фамилия</label>
+                                 <input class="form-control" type="text" value="" id="last_nameSave"
+                                        placeholder="Введите фамилию">
+                              </div>
+                           </div>
+                           <div class="row justify-content-center">
+                              <div class="form-group col-6">
+                                 <label class="form-label" for="ageSave">Возраст</label>
+                                 <input class="form-control" type="number" value="" id="ageSave"
+                                        placeholder="Введите возраст">
+                              </div>
+                           </div>
+                           <div class="row justify-content-center">
+                              <div class="form-group col-2">
+                                 <label class="form-label" for="countrySave">Страна</label>
+                                 <input class="form-control" type="text" value="" id="countrySave"
+                                        placeholder="Введите страну">
+                              </div>
+                              <div class="form-group col-2">
+                                 <label class="form-label" for="citySave">Город</label>
+                                 <input class="form-control" type="text" value="" id="citySave"
+                                        placeholder="Введите город">
+                              </div>
+                              <div class="form-group col-2">
+                                 <label class="form-label" for="cityIndexSave">Индекс города</label>
+                                 <input class="form-control" type="text" value="" id="cityIndexSave"
+                                        placeholder="Введите индекс города">
+                              </div>
+                           </div>
+                           <div class="row justify-content-center">
+                              <div class="form-group col-2">
+                                 <label class="form-label" for="streetSave">Улица</label>
+                                 <input class="form-control" type="text" value="" id="streetSave"
+                                        placeholder="Введите улицу">
+                              </div>
+                              <div class="form-group col-2">
+                                 <label class="form-label" for="houseSave">Номер дома</label>
+                                 <input class="form-control" type="text" value="" id="houseSave"
+                                        placeholder="Введите номер дома">
+                              </div>
+                              <div class="form-group col-2">
+                                 <label class="form-label" for="birthdaySave">Дата рождения</label>
+                                 <input class="form-control" type="date" value="" id="birthdaySave">
+                              </div>
+                           </div>
+                           <div class="row justify-content-center">
+                              <div class="form-group col-6">
+                                 <label class="form-label" for="genderSave">Выберите пол:</label>
+                                 <br>
+                                 <select class="form-select" size="3" id="genderSave" name="gender" required="">
+                                    <option id="ManSave" value="MALE">Мужчина</option>
+                                    <option id="WomanSave" value="FEMALE">Женщина</option>
+                                    <option id="NoGenderSave" value="UNKNOWN">Не определен</option>
+                                 </select>
+                              </div>
+                           </div>
+                           <div class="row justify-content-center">
+                              <div class="form-group col-6">
+                                 <input type="button" class="btn btn-primary" value="Зарегистрироваться"
+                                        onclick="{event.preventDefault(); saveUser()}"/>
+                              </div>
+                           </div>
+                        </form>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+
+      <!--HEADER-->
+      <div th:replace="/includes/header :: header"></div>
+
+      <!--Main zone-->
+      <section class="d-flex">
+         <!--Sidebar-->
+         <div class="bg-light" style="width: 350px; min-height: 100vh; padding-top: 30px; padding-bottom: 200px">
+            <div class="container-fluid">
+               <div class="row">
+                  <div class="col-12 d-flex align-items-center">
+                     <h5>Категории</h5>
+                  </div>
+
+                  <div class="col-12 d-flex justify-content-center">
+                     <hr style="width: 100%; margin: 0;">
+                  </div>
+                  <!--Категории-->
+                  <div class="col-12 mt-4">
+                     <ul id="categories" class="nav nav-pills flex-column mb-auto">
+                        <li class="nav-item">
+                           <a id="popular_show_btn" href="#" class="nav-link active" aria-current="page">Популярное</a>
+                        </li>
+                        <!--Тут home.js генерит кнопки категорий-->
+                     </ul>
+                  </div>
+               </div>
+            </div>
+         </div>
+
+         <!--Main Body-->
+         <div class="container-fluid" style="padding-top: 30px; padding-left: 35px; padding-bottom: 40px;">
+            <div class="row">
+               <div class="col-12">
+                  <form style="width: 650px;" class="d-flex">
+                     <input id="search_input" type="search" class="form-control" name="search"
+                            placeholder="Поиск по наименованию:">
+                     <button id="search_btn" type="button" class="btn btn-success" style="width: 150px;">Поиск</button>
+                  </form>
+               </div>
+
+   <!--             QR and enable 2FA-->
+   <!--            <div class="mt-3" sec:authorize="isAuthenticated()">-->
+   <!--               <th:block th:if="${qr}">-->
+   <!--                  <img th:src="${qr}" alt="qr">-->
+   <!--                  <div class="mt-2">-->
+   <!--                     <button class="btn btn-primary" type="button" onclick="updateTwoFactorAuth(true)">Включить 2FA</button>-->
+   <!--                  </div>-->
+   <!--               </th:block>-->
+   <!--            </div>-->
+
+            <!--Контейнер для динамического контента (js)-->
+            <div class="collapse" id="dinamic_content">
+               <div class="col-12" style="margin-top: 30px;">
+                  <h4 id="dinamic_head"></h4>
+               </div>
+               <!--сюда генерируются товары-->
+               <div class="col-12 d-flex flex-wrap mt-3" id="dinamic_content_inner">
+                  </div>
+               </div>
+
+               <!--Контейнер для статического контента (при загрузке страницы)-->
+               <div class="collapse show" id="popular_show_content">
+                  <div class="col-12" style="margin-top: 30px;">
+                     <h4>
+                        Популярные товары
+                     </h4>
+                  </div>
+                  <!--Блок популярные товары-->
+                  <div id="items" class="col-12 d-flex flex-wrap mt-3">
+                     <th:block th:each="item : ${items}">
+                        <div class="card" style="width: 18rem; margin-right: 15px; margin-top: 20px;">
+                           <img th:src="${item.getImages()[0]}" class="card-img-top" alt="popular_item"
+                                style="height: 180px;">
+                           <div class="card-body">
+                              <h5 th:text="${item.getName()}" class="card-title">Заголовок товара</h5>
+                              <p th:text="${item.getDescription()}" class="card-text">Описание товара:</p>
+                              <div class="d-flex">
+                                 <a href="#" class="btn btn-danger"
+                                    th:attr="onclick=|addCartItem('${item.id}','${item.shopId}')|"
+                                    style="width: 150px;">В корзину</a>
+                                 <a th:href="@{/product/{id}(id = ${item.getId()})}" class="btn btn-primary"
+                                    style="margin-left: 10px;">Смотреть</a>
+                              </div>
+                              <div class="mt-2 d-flex" th:id="'favoriteButton'+${item.id}">
+                                 <!--                                    <button class="btn btn-info btn-block" th:attr="onclick=|addItemToFavorites('${item.id}')|">Добавить в избранное</button>-->
+                              </div>
+                              <div th:name="favItems" th:id="'favItem'+${item.id}"></div>
+                           </div>
+                        </div>
+                     </th:block>
+
+                  </div>
+                  <!--Блок популярные магазины-->
+                  <div class="col-12" style="margin-top: 30px;">
+                     <h4>
+                        Популярные магазины
+                     </h4>
+                  </div>
+
+                  <div class="col-12 d-flex flex-wrap mt-3">
+   <!--                  <th:block th:each="shop : ${shops}">-->
+   <!--                     <div class="card" style="width: 18rem; margin-right: 15px; margin-top: 20px; overflow: hidden;">-->
+   <!--                        <img th:src="${shop.getLogo()}" class="card-img-top" alt="popular_shop"-->
+   <!--                             style="height: 180px;">-->
+   <!--                        <div class="card-body">-->
+   <!--                           <h5 th:text="${shop.getName()}" class="card-title">Заголовок магазины</h5>-->
+   <!--                           <p th:text="${shop.getDescription()}" class="card-text">Описание магазина:</p>-->
+   <!--                           <a th:href="@{/showcase/{id}(id = ${shop.getId})}" class="btn btn-danger">Перейти в-->
+   <!--                              магазин</a>-->
+   <!--                        </div>-->
+   <!--                     </div>-->
+   <!--                  </th:block>-->
+                  </div>
+               </div>
+
+            </div>
+         </div>
+      </section>
+   </div>  <!--   page -->
+
 
    <script>
       /**
@@ -517,11 +519,11 @@
             await favoriteButtonItem(itemId);
          }
       }
-
    </script>
 <!--   <script type="text/javascript" th:src="@{/js/favoriteHome.js}" src="../static/js/favoriteHome.js"></script>-->
 <!--   <script type="text/javascript" th:src="@{js/registration.js}" src="../static/js/registration.js"></script>-->
 <!--   <script type="text/javascript" th:src="@{js/signin.js}" src="../static/js/signin.js"></script>-->
 <!--   <script type="text/javascript" th:src="@{js/twoFactorAuth.js}" src="../static/js/twoFactorAuth.js"></script>-->
+<!--<script src="../../js/index.js" type="module"></script>-->
 </body>
 </html>

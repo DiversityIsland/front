@@ -29,6 +29,12 @@ public class GatewayController {
         return "feedback";
     }
 
+    @Secured({"ROLE_MODERATOR", "ROLE_ADMIN"})
+    @GetMapping("/moderator")
+    public String moderatorPage() {
+        return "moderator";
+    }
+
 }
 
 
