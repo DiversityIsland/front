@@ -1,8 +1,9 @@
 import {ModeratorApi} from "./ModeratorApi.js";
 import {
-    createItemsContent, itemButtonsHandler,
-    createShopsContent, shopButtonsHandler,
-    createReviewsContent, reviewButtonsHandler
+    createItemsContent, updateItemsAmount,
+    createShopsContent, updateShopsAmount,
+    createReviewsContent, updateReviewsAmount,
+    setAllUnmoderatedAmount
 } from "./moderatorUtiles.js";
 
 const itemButton = document.getElementById("v-pills-items-tab")
@@ -17,6 +18,8 @@ api.getUnmoderatedItems()
     .then(res => {
         itemsContainer.insertAdjacentElement("afterbegin", createItemsContent(res))
     })
+
+setAllUnmoderatedAmount();
 
 itemButton.addEventListener("click", () => {
     api.getUnmoderatedItems()

@@ -46,6 +46,7 @@ function createItemsContent(arr) {
     }
     container.insertAdjacentHTML("afterbegin", html);
     itemButtonsHandler(container);
+    updateItemsAmount();
     return container;
 }
 
@@ -103,6 +104,11 @@ function itemButtonsHandler(itemsContainer) {
     })
 }
 
+function updateItemsAmount() {
+    api.getUnmoderatedItemsCount()
+        .then(res => document.getElementById('v-pills-items-tab').textContent = `Товары ${res}`);
+}
+
 
 // ============================ shops =================================
 
@@ -153,6 +159,7 @@ function createShopsContent (arr) {
     }
     container.insertAdjacentHTML("afterbegin", html);
     shopButtonsHandler(container);
+    updateShopsAmount();
     return container;
 }
 
@@ -210,6 +217,11 @@ function shopButtonsHandler(tabsContainer) {
     })
 }
 
+function updateShopsAmount() {
+    api.getUnmoderatedShopsCount()
+        .then(res => document.getElementById('v-pills-shops-tab').textContent = `Магазины ${res}`);
+}
+
 
 
 // ============================ reviews =================================
@@ -257,6 +269,7 @@ function createReviewsContent (arr) {
     }
     container.insertAdjacentHTML("afterbegin", html);
     reviewButtonsHandler(container);
+    updateReviewsAmount();
     return container;
 }
 
@@ -314,9 +327,22 @@ function reviewButtonsHandler( tabsContainer) {
     })
 }
 
+function updateReviewsAmount() {
+    api.getUnmoderatedReviewsCount()
+        .then(res => document.getElementById('v-pills-reviews-tab').textContent = `Отзывы ${res}`);
+}
+
+
+function setAllUnmoderatedAmount() {
+    updateItemsAmount();
+    updateShopsAmount();
+    updateReviewsAmount();
+}
+
 
 export {
-    createItemsContent, itemButtonsHandler,
-    createShopsContent, shopButtonsHandler,
-    createReviewsContent, reviewButtonsHandler
+    createItemsContent, updateItemsAmount,
+    createShopsContent, updateShopsAmount,
+    createReviewsContent, updateReviewsAmount,
+    setAllUnmoderatedAmount
 }
