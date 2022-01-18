@@ -58,7 +58,6 @@ class ModeratorApi {
     }
 
     updateShop(shop) {
-        console.log(shop)
         return fetch(this._url + `/moderate/shops/editShop`, {
             method: 'PUT',
             headers: this._head,
