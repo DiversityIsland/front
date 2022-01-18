@@ -5,11 +5,10 @@ function signin() {
          "Accept": "application/json",
          "Content-Type": "application/json; charset=utf-8",
       },
-      data: {
+      data: JSON.stringify({
          username: document.getElementById('username_input').value,
          password: document.getElementById('password_input').value,
-      }
+      })
    })
    requestForLogin.done(() => location.reload())
 }
-
