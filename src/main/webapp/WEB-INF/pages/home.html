@@ -411,8 +411,6 @@
             toggleClassesContent($(this));
             toggleClassesNavBar(null);
             let valueSearch = search_input.val();
-            search_input.val('');
-
             /**
              * обрабочтик
              * проверка на пустое значение поиска
@@ -422,6 +420,7 @@
                dinamic_head.html('Все товары')
             } else {
                dinamic_head.html('');
+               searchByWord($(this))
                dinamic_head.html('Результат запроса "' + valueSearch + '"');
             }
          })
@@ -460,7 +459,37 @@
       }
 
       /**
+       *
+       * */
+      async function searchByWord(e) {
+         const response = await fetch("/search/" + search_input.val());
+         if (response.ok) {
+            let items = await response.json();
+            /**
+             * Добавляем итемы по категориям на страницу
+             * */
+            let itemsByCategoryHTML = "";
+            for (let i = 0; i < items.length; i++) {
+               itemsByCategoryHTML += '<div class="card" style="width: 18rem; margin-right: 15px; margin-top: 20px;">\n' +
+                       '                       <img src="' + items[i].images[0] + '" class="card-img-top" alt="popular_item" style="height: 180px;">' +
+                       '                           <div class="card-body">\n' +
+                       '                                <h5 class="card-title">' + items[i].name + '</h5>' +
+                       '                                <p class="card-text">' + items[i].description + '</p>' +
+                       '                                <div class="d-flex">\n' +
+                       '                                    <a href="#" class="btn btn-danger" style="width: 150px;">В корзину</a>' +
+                       '                                    <a href="/product/' + items[i].id + '" class="btn btn-primary" style="margin-left: 10px;">Смотреть</a>' +
+                       '                                </div>' +
+                       '                           </div>' +
+                       '                   </div>';
+            }
+            dinamic_inner_content.html("");
+            dinamic_inner_content.html(itemsByCategoryHTML);
+         }
+      }
+
+      /**
        * функция переключения классов контейнера с контентом
+       *
        */
       function toggleClassesContent(e) {
          if ($(e).is(popular_show_btn)) {
