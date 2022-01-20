@@ -28,7 +28,7 @@
                         style="vertical-align: inherit;">Избранное</font></font></a></li>
                   <li><a href="#" class="nav-link px-2 text-white"><font style="vertical-align: inherit;"><font
                         style="vertical-align: inherit;">Ещё...</font></font></a></li>
-                  <li><a  href="/moderator" sec:authorize="hasAnyAuthority('ROLE_MODERATOR')" class="nav-link px-2 text-white">
+                  <li><a href="/moderator" sec:authorize="hasAnyAuthority('ROLE_MODERATOR', 'ROLE_ADMIN')" class="nav-link px-2 text-white">
                      <font style="vertical-align: inherit;">Панель модератора</font></a></li>
                   <li><a  href="/admin" sec:authorize="hasAnyAuthority('ROLE_ADMIN')" class="nav-link px-2 text-white">
                      <font style="vertical-align: inherit;">Панель администратора</font></a></li>

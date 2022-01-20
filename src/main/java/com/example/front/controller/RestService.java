@@ -45,4 +45,21 @@ public class RestService {
         Clog.status_minor.log(String.format("[RestService] postJSON: %s [HTTP %s]", url, respEntity.getStatusCodeValue()));
         return respEntity;
     }
+
+    public static ResponseEntity<String> putJSON(String url, String postData) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        HttpEntity<String> entity = new HttpEntity<>(postData, headers);
+
+        ResponseEntity<String> respEntity = new ResponseEntity<>("", HttpStatus.SERVICE_UNAVAILABLE);
+        try {
+            respEntity = new RestTemplate().exchange(url, HttpMethod.PUT, entity, String.class);
+        } catch (ResourceAccessException e) {
+            Clog.err.log(e.toString());
+        }
+
+        Clog.status_minor.log(String.format("[RestService] putJSON: %s [HTTP %s]", url, respEntity.getStatusCodeValue()));
+        return respEntity;
+    }
 }
