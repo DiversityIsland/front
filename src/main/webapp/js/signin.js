@@ -6,9 +6,11 @@ function signin() {
          "Content-Type": "application/json; charset=utf-8",
       },
       data: JSON.stringify({
-         username: document.getElementById('username_input').value,
+         login: document.getElementById('username_input').value,
          password: document.getElementById('password_input').value,
       })
    })
    requestForLogin.done(() => location.reload())
 }
+
+console.log("signin")

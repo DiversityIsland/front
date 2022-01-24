@@ -2,9 +2,12 @@ package com.example.front.controller;
 
 import com.example.front.Clog;
 import org.springframework.http.*;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestTemplate;
+
+import java.net.HttpURLConnection;
 
 @Service
 public class RestService {
@@ -16,6 +19,7 @@ public class RestService {
     public static ResponseEntity<String> getJSON(String url) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
+        System.out.println(SecurityContextHolder.getContext().getAuthentication().getDetails());
 
         HttpEntity<String> entity = new HttpEntity<>(headers);
         ResponseEntity<String> respEntity = new ResponseEntity<>("", HttpStatus.SERVICE_UNAVAILABLE);
