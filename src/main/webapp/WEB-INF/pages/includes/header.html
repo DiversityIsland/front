@@ -24,15 +24,15 @@
                         style="vertical-align: inherit;">Магазины</font></font></a></li>
                   <li><a href="#" class="nav-link px-2 text-white"><font style="vertical-align: inherit;"><font
                         style="vertical-align: inherit;">Товары</font></font></a></li>
-                  <li><a href="/favorites" sec:authorize="hasAnyAuthority('ROLE')" class="nav-link px-2 text-white" id="linkFavorites" ><font style="vertical-align: inherit;"><font
+                  <li><a href="/favorites" sec:authorize="hasAnyAuthority('UNREGISTERED', 'ROLE_ANONYMOUS')" class="nav-link px-2 text-white" id="linkFavorites" ><font style="vertical-align: inherit;"><font
                         style="vertical-align: inherit;">Избранное</font></font></a></li>
                   <li><a href="#" class="nav-link px-2 text-white"><font style="vertical-align: inherit;"><font
                         style="vertical-align: inherit;">Ещё...</font></font></a></li>
-                  <li><a href="/moderator" sec:authorize="hasAnyAuthority('ROLE_MODERATOR')" class="nav-link px-2 text-white">
+                  <li><a href="/moderator" sec:authorize="hasAnyAuthority('MODERATOR')" class="nav-link px-2 text-white">
                      <font style="vertical-align: inherit;">Панель модератора</font></a></li>
-                  <li><a  href="/admin" sec:authorize="hasAnyAuthority('ROLE_ADMIN')" class="nav-link px-2 text-white">
+                  <li><a  href="/admin" sec:authorize="hasAnyAuthority('ADMIN')" class="nav-link px-2 text-white">
                      <font style="vertical-align: inherit;">Панель администратора</font></a></li>
-                  <li><a  href="/user" sec:authorize="hasAnyAuthority('ROLE_USER')" class="nav-link px-2 text-white">
+                  <li><a  href="/user" sec:authorize="hasAnyAuthority('USER')" class="nav-link px-2 text-white">
                      <font style="vertical-align: inherit;">Профиль юзера</font></a></li>
                </ul>
 

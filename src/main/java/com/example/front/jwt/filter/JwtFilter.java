@@ -32,18 +32,9 @@ public class JwtFilter extends GenericFilterBean {
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        System.out.println("\n\n========================= SECURITY CONTEXT AUTHENTICATION ========================");
-        if(SecurityContextHolder.getContext().getAuthentication() != null){
-            System.out.println("||   getPrincipal() = " +
-                    SecurityContextHolder.getContext().getAuthentication().getPrincipal());
-            System.out.println("||   getAuthorities() = " +
-                    SecurityContextHolder.getContext().getAuthentication().getAuthorities());
-            System.out.println("||   isAuthenticated() = " +
-                    SecurityContextHolder.getContext().getAuthentication().isAuthenticated() + "\n\n");
-        }
         String token = getTokenFromRequest((HttpServletRequest) servletRequest);
         final String refreshToken = getRefreshTokenFromRequest((HttpServletRequest) servletRequest);
-        if(token == null && refreshToken != null) {
+        if(token == null && refreshToken != null && authService.getAuthentication() == null ) {
             token = jwtController.jwtTokenPost((HttpServletResponse) servletResponse,
                     (HttpServletRequest)servletRequest,
                     "{\"refreshToken\":" + "\"" + refreshToken + "\"" +"}");
