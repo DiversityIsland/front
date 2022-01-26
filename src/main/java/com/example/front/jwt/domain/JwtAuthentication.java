@@ -15,6 +15,7 @@ public class JwtAuthentication implements Authentication {
     private boolean authenticated;
     private String username;
     private Set<Role> roles;
+    private String bearer;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -23,7 +24,7 @@ public class JwtAuthentication implements Authentication {
 
     @Override
     public Object getCredentials() {
-        return null;
+        return String.format("Bearer %s", bearer);
     }
 
     @Override
