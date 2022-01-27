@@ -11,9 +11,19 @@ import static com.example.front.controller.api.Constants.BACK_SERVER_ADDRESS;
 @RequestMapping("/")
 public class Category {
 
-    @GetMapping("/api/category")
-    public ResponseEntity<String> category() {
-        return getJSON(BACK_SERVER_ADDRESS + "/api/category/");
+    @PostMapping("/api/category/add")
+    public ResponseEntity<String> add(@RequestBody String category) {
+        return postJSON(BACK_SERVER_ADDRESS + "/api/category/add", category);
+    }
+
+    @PutMapping("/api/category/save")
+    public ResponseEntity<String> save(@RequestBody String category) {
+        return putJSON(BACK_SERVER_ADDRESS + "/api/category/save", category);
+    }
+
+    @DeleteMapping("/api/category/{id}")
+    public ResponseEntity<String> delete(@PathVariable String id) {
+        return deleteJSON(BACK_SERVER_ADDRESS + "/api/category/" + id);
     }
 
     @GetMapping("/api/category/{id}")
@@ -25,5 +35,4 @@ public class Category {
     public ResponseEntity<String> categoryId(@PathVariable long id) {
         return getJSON(BACK_SERVER_ADDRESS + "/category/" + id);
     }
-
 }
