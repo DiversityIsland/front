@@ -1,17 +1,16 @@
-package com.example.front.jwt;
+package com.example.front.jwt.service;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import org.springframework.web.util.WebUtils;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
-
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class CookieUtils {
 
-    private CookieUtils() {
-    }
-
-    static Cookie setCookie(String name, String value, int age) {
+    public static Cookie setCookie(String name, String value, int age) {
         Cookie cookie = new Cookie(name, value);
         cookie.setSecure(true);
         cookie.setHttpOnly(true);
